@@ -7,20 +7,22 @@
 #define BOARDWIDTH 4
 #define BOARDHEIGTH 6
 using namespace std; 
+// x la hang, y la cot 
 struct position
 {
-	int x, y;
+	int x; // Toa do hang 
+	int y; // Toa do cot 
 };
 struct Cell_1
 {
 	//int i, j;
 	//char c = ' ';
 	char c;
-	// Check Identify
-	bool Is_Valid = 1, Is_Selected = 0;
+	// Check Barrier
+	bool Barrier = true, Is_Selected = 0;
 };
-void Init_Board(Cell_1** board);
-void Output_Board(Cell_1** board);
-void Delete_Board(Cell_1** board);
-bool Next_Check(Cell_1** board, position pos_1, position pos_2);
-bool Z_Check(Cell_1** board, position pos_1, position pos_2);
+void InitBoard(Cell_1** board);
+void OutputBoard(Cell_1** board);
+void DeleteBoard(Cell_1** board);
+bool LineCheck(Cell_1** board, position pos1, position pos2);
+bool ZCheck(Cell_1** board, position pos1, position pos2);

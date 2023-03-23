@@ -1,5 +1,5 @@
 #include "Header.h"
-void Init_Board(Cell_1** board)
+void InitBoard (Cell_1** board)
 {
 	// Initializing 2d pointer array
 	for (int i = 0; i < BOARDHEIGTH; i++)
@@ -15,11 +15,9 @@ void Init_Board(Cell_1** board)
 		char random_c;
 		random_c = 65 + rand() % 26;
 		int  time = 2;
-		//srand((int)time(NULL));
 		// Insert the letter to random indexes
 		while (time)
 		{
-			//srand(time(NULL));
 			int row = rand() % BOARDHEIGTH;
 			int col = rand() % BOARDWIDTH;
 			if (board[row][col].c == -51)
@@ -31,7 +29,7 @@ void Init_Board(Cell_1** board)
 		num--;
 	}
 }
-void Output_Board(Cell_1** board)
+void OutputBoard (Cell_1** board)
 {
 	for (int i = 0; i < BOARDHEIGTH; i++)
 	{
@@ -42,31 +40,58 @@ void Output_Board(Cell_1** board)
 		cout << endl;
 	}
 }
-void Delete_Board(Cell_1** board)
+void DeleteBoard (Cell_1** board)
 {
 	for (int i = 0; i < BOARDHEIGTH; i++)
 		delete[] board[i];
 	delete[] board;
 }
-bool Next_Check(Cell_1** board, position pos_1, position pos_2)
+// Check cot + dong 
+bool LineCheck (Cell_1** board, position pos1, position pos2)
 {
-	if (((pos_1.x == pos_2.x + 1) || (pos_1.y == pos_2.y + 1)) && (pos_2.x == pos_2.y))
+	int min, max;
+	if (pos1.x == pos2.x)
 	{
-		if(board[pos_1.y][pos_1.x].c == board[pos_2.y][pos_2.x].c)
-		return true;
+		if (pos1.y > pos2.y)
+		{
+			min = pos2.y;
+			max = pos1.y;
+		}
+		else
+		{
+			min = pos1.y;
+			max = pos2.y;
+		}
+		for (int i = min; i <= max; i++)
+		{
+			if (board[pos1.x][i].Barrier == true)
+				return false;
+		}
 	}
-		
-	if (((pos_2.x == pos_1.x + 1) || (pos_2.y == pos_1.y + 1)) && (pos_1.x == pos_1.y))
+	if (pos1.y == pos2.y)
 	{
-		if (board[pos_1.y][pos_1.x].c == board[pos_2.y][pos_2.x].c)
-			return true;
+		if (pos1.x > pos2.x)
+		{
+			min = pos2.x;
+			max = pos1.x;
+		}
+		else
+		{
+			min = pos1.x;
+			max = pos2.x;
+		}
 	}
-	return false;
+	for (int i = min; i <= max; i++)
+	{
+		if (board[i][pos1.y].Barrier == true)
+			return false;
+	}
+	return true;
 }
 
-bool Z_Check(Cell_1** board, position pos_1, position pos_2)
+bool ZCheck (Cell_1** board, position pos1, position pos2)
 {
-	if (pos_1.x == pos_2.y || pos_1.y == pos_2.y)
+	if (pos1.x == pos2.y || pos1.y == pos2.y)
 		return false;
 
 }
