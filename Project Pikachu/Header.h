@@ -24,5 +24,6 @@ struct Cell_1
 void InitBoard(Cell_1** board);
 void OutputBoard(Cell_1** board);
 void DeleteBoard(Cell_1** board);
-bool LineCheck(Cell_1** board, position pos1, position pos2);
-bool ZCheck(Cell_1** board, position pos1, position pos2);
+bool Colcheck(Cell_1** board, int x1, int x2, int y);
+bool RowCheck(Cell_1** board, int y1, int y2, int x);
+bool Zcheck(Cell_1** board, int x1, int x2, int y1, int y2);

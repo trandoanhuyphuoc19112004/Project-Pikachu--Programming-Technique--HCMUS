@@ -8,8 +8,10 @@ int main()
 	OutputBoard(Board);
 	cin >> pos1.x >> pos1.y;
 	cin >> pos2.x >> pos2.y;
-	cout << LineCheck(Board, pos1, pos2);
-	//cout << Next_Check(Board, pos1, pos2);
-	// Check doc duoc	
+	if (RowCheck(Board, pos1.y, pos2.y, pos1.x) or Colcheck(Board, pos1.x, pos2.x, pos1.y) or Zcheck(Board, pos1.x, pos2.x, pos1.y, pos2.y))
+	{
+		cout << "True" << endl;
+	}
+	else cout << "False" << endl;
 	DeleteBoard(Board);
 }
