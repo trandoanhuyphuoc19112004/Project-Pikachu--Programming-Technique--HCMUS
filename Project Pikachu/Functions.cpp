@@ -47,51 +47,72 @@ void DeleteBoard (Cell_1** board)
 	delete[] board;
 }
 // Check cot + dong 
-bool LineCheck (Cell_1** board, position pos1, position pos2)
+bool RowCheck(Cell_1** board, int y1, int y2, int x)
 {
 	int min, max;
-	if (pos1.x == pos2.x)
 	{
-		if (pos1.y > pos2.y)
+		if (y1 > y2)
 		{
-			min = pos2.y;
-			max = pos1.y;
+			min = y2;
+			max = y1;
 		}
 		else
 		{
-			min = pos1.y;
-			max = pos2.y;
+			min = y1;
+			max = y2;
 		}
-		for (int i = min; i <= max; i++)
+		for (int i = min + 1; i < max; i++)
 		{
-			if (board[pos1.x][i].Barrier == true)
+			if (board[x][i].Barrier == true)
 				return false;
 		}
 	}
-	if (pos1.y == pos2.y)
+	return true;
+}
+bool Colcheck(Cell_1** board, int x1, int x2, int y)
+{
+	int min, max;
+	if (x1 > x2)
 	{
-		if (pos1.x > pos2.x)
-		{
-			min = pos2.x;
-			max = pos1.x;
-		}
-		else
-		{
-			min = pos1.x;
-			max = pos2.x;
-		}
+		min = x2;
+		max = x1;
 	}
-	for (int i = min; i <= max; i++)
+	else
 	{
-		if (board[i][pos1.y].Barrier == true)
+		min = x1;
+		max = x2;
+	}
+	for (int i = min + 1; i < max; i++)
+	{
+		if (board[i][y].Barrier == true)
 			return false;
 	}
 	return true;
 }
-
-bool ZCheck (Cell_1** board, position pos1, position pos2)
+bool Zcheck(Cell_1 **board, int x1, int x2, int y1, int y2) 
 {
-	if (pos1.x == pos2.y || pos1.y == pos2.y)
-		return false;
-
+	int xMin, yMin, xMax, yMax;
+	if (x1 > x2) {
+		xMin = x2;
+		xMax = x1;
+	}
+	else {
+		xMin = x1;
+		xMax = x2;
+	}
+	if (y1 > y2) {
+		yMin = y2;
+		yMax = y1;
+	}
+	else {
+		yMin = y1;
+		yMax = y2;
+	}
+	for (int i = yMin - 1; i < yMax; i++) {
+		if (RowCheck(board, yMin, i, xMin) && Colcheck(board, xMin - 1, xMax + 1, i) && RowCheck(board, i - 1, yMax, xMax)) return true;
+		if (Colcheck(board, xMin, i, yMin) && RowCheck(board, yMin - 1, yMax + 1, i) && Colcheck(board, i - 1, xMax, yMax)) return true;
+		else continue;
+	}
+	return false;
 }
+
