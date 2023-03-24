@@ -25,7 +25,7 @@ void InitBoard(Cell_1** board)
 	
 	srand((char)time(NULL));
 	int num = (BOARDHEIGTH * BOARDWIDTH) / 2;
-	/*
+	
 	while (num)
 	{
 		// Random Uppercase Letter
@@ -45,7 +45,7 @@ void InitBoard(Cell_1** board)
 		}
 		num--;
 	}
-	*/
+	
 }
 void OutputBoard (Cell_1** board, int nRow, int nCol)
 {
