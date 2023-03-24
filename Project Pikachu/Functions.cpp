@@ -101,43 +101,46 @@ bool Zcheck(Cell_1 **board, int xMin, int xMax, int yMin, int yMax)
 }
 bool CheckOverall(Cell_1** board, int x1, int x2, int y1, int y2)
 {
-	int xMin, yMin, xMax, yMax;
-	if (x1 > x2) {
-		xMin = x2;
-		xMax = x1;
-	}
-	else
-		if (x2 > x1)
-		{
-			xMin = x1;
-			xMax = x2;
+	if (board[x1][y1].c == board[x2][y2].c && board[x1][y1].c != '\0')
+	{
+		int xMin, yMin, xMax, yMax;
+		if (x1 > x2) {
+			xMin = x2;
+			xMax = x1;
 		}
-	if (y1 > y2)
-	{
-		yMin = y2;
-		yMax = y1;
-	}
-	else
-		if (y2 > y1)
+		else
+			if (x2 > x1)
+			{
+				xMin = x1;
+				xMax = x2;
+			}
+		if (y1 > y2)
 		{
-			yMin = y1;
-			yMax = y2;
+			yMin = y2;
+			yMax = y1;
 		}
-	if (y1 == y2)
-	{
-		if (Colcheck(board, xMin, xMax, y1))
-		return true;
-	}
-	if (x1 == x2)
-	{
-		if (RowCheck(board, yMin, yMax, x1))
+		else
+			if (y2 > y1)
+			{
+				yMin = y1;
+				yMax = y2;
+			}
+		if (y1 == y2)
+		{
+			if (Colcheck(board, xMin, xMax, y1))
+				return true;
+		}
+		if (x1 == x2)
+		{
+			if (RowCheck(board, yMin, yMax, x1))
+				return true;
+		}
+		if (LCheck(board, xMin, xMax, yMin, yMax))
 			return true;
-	}
-	
-	if (LCheck(board, xMin, xMax, yMin, yMax))
-		return true;
-	if (Zcheck(board, xMin, xMax, yMin, yMax))
-		return true;
+		if (Zcheck(board, xMin, xMax, yMin, yMax))
+			return true;
+		return false;
+	} 
 	return false;
 	
 }

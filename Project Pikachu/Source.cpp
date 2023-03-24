@@ -12,5 +12,6 @@ int main()
 		cin >> pos2.x >> pos2.y;
 		ConverToNull(Board, pos1.x, pos2.x, pos1.y, pos2.y);
 	} while (!CheckEndGame(Board, BOARDHEIGTH + 2, BOARDWIDTH + 2));
+	cout << "End Game!" << endl;
 	DeleteBoard(Board);
 }
