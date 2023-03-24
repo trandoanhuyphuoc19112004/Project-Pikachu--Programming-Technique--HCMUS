@@ -25,7 +25,10 @@ struct Cell_1
 void OutputBoard(Cell_1** board, int nRow, int nCol);
 void InitBoard(Cell_1** board);
 void DeleteBoard(Cell_1** board);
-bool Colcheck(Cell_1** board, int x1, int x2, int y);
-bool RowCheck(Cell_1** board, int y1, int y2, int x);
-bool LCheck(Cell_1** board, int x1, int xMin, int xMax, int  yMin, int yMax);
-bool Zcheck(Cell_1** board, int x1, int x2, int y1, int y2);
+bool Colcheck(Cell_1** board, int xmin, int xmax, int y);
+bool RowCheck(Cell_1** board, int ymin, int ymax, int x);
+bool LCheck(Cell_1** board, int xMin, int xMax, int  yMin, int yMax);
+bool Zcheck(Cell_1** board, int xMin, int xMax, int yMin, int yMax);
+bool CheckOverall(Cell_1** board, int x1, int x2, int y1, int y2);
+void ConverToNull(Cell_1** board, int x1, int x2, int y1, int y2);
+bool CheckEndGame(Cell_1** board, int nRow, int nCol);
