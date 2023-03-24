@@ -25,6 +25,7 @@ void InitBoard(Cell_1** board)
 	
 	srand((char)time(NULL));
 	int num = (BOARDHEIGTH * BOARDWIDTH) / 2;
+	/*
 	while (num)
 	{
 		// Random Uppercase Letter
@@ -44,13 +45,13 @@ void InitBoard(Cell_1** board)
 		}
 		num--;
 	}
-	
+	*/
 }
-void OutputBoard (Cell_1** board)
+void OutputBoard (Cell_1** board, int nRow, int nCol)
 {
-	for (int i = 0; i < BOARDHEIGTH; i++)
+	for (int i = 0; i < nRow; i++)
 	{
-		for (int j = 0; j < BOARDWIDTH; j++)
+		for (int j = 0; j < nCol; j++)
 		{
 			cout << board[i][j].c << " ";
 		}

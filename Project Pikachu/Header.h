@@ -22,8 +22,8 @@ struct Cell_1								// 0 * * * * 0
 	bool Is_Selected = 0;
 
 };
+void OutputBoard(Cell_1** board, int nRow, int nCol);
 void InitBoard(Cell_1** board);
-void OutputBoard(Cell_1** board);
 void DeleteBoard(Cell_1** board);
 bool Colcheck(Cell_1** board, int x1, int x2, int y);
 bool RowCheck(Cell_1** board, int y1, int y2, int x);
