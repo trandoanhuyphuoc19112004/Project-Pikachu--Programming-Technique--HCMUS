@@ -7,19 +7,20 @@
 #define BOARDWIDTH 4
 #define BOARDHEIGTH 6
 using namespace std; 
-// x la hang, y la cot 
-struct position
-{
-	int x; // Toa do hang 
-	int y; // Toa do cot 
-};
-struct Cell_1
-{
-	//int i, j;
+// x la hang, y la cot                      // 0 0 0 0 0 0
+struct position                             // 0 * * * * 0
+{											// 0 * * * * 0
+	int x; // Toa do hang					// 0 * * * * 0
+	int y; // Toa do cot					// 0 * * * * 0
+};											// 0 * * * * 0
+struct Cell_1								// 0 * * * * 0
+{                                           // 0 0 0 0 0 0 
+	int i, j;
 	//char c = ' ';
 	char c;
 	// Check Barrier
-	bool Barrier = true, Is_Selected = 0;
+	bool Is_Selected = 0;
+
 };
 void InitBoard(Cell_1** board);
 void OutputBoard(Cell_1** board);

@@ -1,12 +1,28 @@
 #include "Header.h"
-void InitBoard (Cell_1** board)
+void InitBoard(Cell_1** board)
 {
 	// Initializing 2d pointer array
-	for (int i = 0; i < BOARDHEIGTH; i++)
+	for (int i = 0; i < BOARDHEIGTH + 2; i++)
 	{
-		board[i] = new Cell_1 [BOARDWIDTH];
+		board[i] = new Cell_1[BOARDWIDTH + 2];
 	}
+	//board[BOARDHEIGTH][BOARDWIDTH].c = '\0';
+	
+	for (int i = 0; i <= BOARDHEIGTH + 1; i++)
+	{
+		board[i][0].c = '\0';
+		board[i][BOARDWIDTH + 1].c = '\0';
+	}
+	for (int i = 0; i <= BOARDWIDTH + 1; i++)
+	{
+		board[BOARDHEIGTH + 1][i].c = '\0';
+		board[0][i].c = '\0';
+	}
+	
+
+	
 	// Attach values randomly to each elements
+	
 	srand((char)time(NULL));
 	int num = (BOARDHEIGTH * BOARDWIDTH) / 2;
 	while (num)
@@ -18,8 +34,8 @@ void InitBoard (Cell_1** board)
 		// Insert the letter to random indexes
 		while (time)
 		{
-			int row = rand() % BOARDHEIGTH;
-			int col = rand() % BOARDWIDTH;
+			int row = rand() % BOARDHEIGTH + 1;
+			int col = rand() % BOARDWIDTH + 1 ;
 			if (board[row][col].c == -51)
 			{
 				board[row][col].c = random_c;
@@ -28,6 +44,7 @@ void InitBoard (Cell_1** board)
 		}
 		num--;
 	}
+	
 }
 void OutputBoard (Cell_1** board)
 {
@@ -63,7 +80,7 @@ bool RowCheck(Cell_1** board, int y1, int y2, int x)
 		}
 		for (int i = min + 1; i < max; i++)
 		{
-			if (board[x][i].Barrier == true)
+			if (board[x][i].c != '\0')
 				return false;
 		}
 	}
@@ -84,7 +101,7 @@ bool Colcheck(Cell_1** board, int x1, int x2, int y)
 	}
 	for (int i = min + 1; i < max; i++)
 	{
-		if (board[i][y].Barrier == true)
+		if (board[i][y].c != '\0')
 			return false;
 	}
 	return true;
