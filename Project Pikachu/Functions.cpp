@@ -5,23 +5,12 @@ void InitBoard(Cell_1** board)
 	for (int i = 0; i < BOARDHEIGTH + 2; i++)
 	{
 		board[i] = new Cell_1[BOARDWIDTH + 2];
+		for (int j = 0; j < BOARDWIDTH + 2; j++)
+		{
+			board[i][j].x = i;
+			board[i][j].y = j;
+		}
 	}
-	//board[BOARDHEIGTH][BOARDWIDTH].c = '\0';
-	
-	for (int i = 0; i <= BOARDHEIGTH + 1; i++)
-	{
-		board[i][0].c = '\0';
-		board[i][BOARDWIDTH + 1].c = '\0';
-	}
-	for (int i = 0; i <= BOARDWIDTH + 1; i++)
-	{
-		board[BOARDHEIGTH + 1][i].c = '\0';
-		board[0][i].c = '\0';
-	}
-	
-
-	
-	// Attach values randomly to each elements
 	
 	srand((char)time(NULL));
 	int num = (BOARDHEIGTH * BOARDWIDTH) / 2;
@@ -35,9 +24,10 @@ void InitBoard(Cell_1** board)
 		// Insert the letter to random indexes
 		while (time)
 		{
-			int row = rand() % BOARDHEIGTH + 1;
+			//int idx = rand() % 24;
+			int row = rand() % BOARDHEIGTH + 1 ;
 			int col = rand() % BOARDWIDTH + 1 ;
-			if (board[row][col].c == -51)
+			if (board[row][col].c == 1)
 			{
 				board[row][col].c = random_c;
 				time--;
@@ -81,7 +71,7 @@ bool RowCheck(Cell_1** board, int y1, int y2, int x)
 		}
 		for (int i = min + 1; i < max; i++)
 		{
-			if (board[x][i].c != '\0')
+			if (board[x][i].c != 1)
 				return false;
 		}
 	}
@@ -102,10 +92,16 @@ bool Colcheck(Cell_1** board, int x1, int x2, int y)
 	}
 	for (int i = min + 1; i < max; i++)
 	{
-		if (board[i][y].c != '\0')
+		if (board[i][y].c != 1)
 			return false;
 	}
 	return true;
+}
+bool LCheck(Cell_1 **board, int x1, int xMin, int xMax, int  yMin, int yMax) 
+{
+	if (RowCheck(board, yMin, yMax + 1, xMin) && Colcheck(board, xMin - 1, xMax, yMax)) return true;
+	if (Colcheck(board, xMin, xMax + 1, yMin) && RowCheck(board, yMin - 1, yMax, xMax)) return true;
+	return false;
 }
 bool Zcheck(Cell_1 **board, int x1, int x2, int y1, int y2) 
 {

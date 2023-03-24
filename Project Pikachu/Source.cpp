@@ -8,7 +8,7 @@ int main()
 	OutputBoard(Board, BOARDHEIGTH + 2 , BOARDWIDTH + 2);
 	cin >> pos1.x >> pos1.y;
 	cin >> pos2.x >> pos2.y;
-	if ((RowCheck(Board, pos1.y, pos2.y, pos1.x) ) || Colcheck(Board, pos1.x, pos2.x, pos1.y) || Zcheck(Board, pos1.x, pos2.x, pos1.y, pos2.y))
+	if (RowCheck(Board, pos1.y, pos2.y, pos1.x))
 		cout << "True" << endl;
 	else cout << "False" << endl;
 	DeleteBoard(Board);

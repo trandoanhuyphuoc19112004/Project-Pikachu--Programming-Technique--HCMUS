@@ -4,20 +4,20 @@
 #include <string>
 #include <Windows.h>
 #include <cstdlib>
-#define BOARDWIDTH 4
-#define BOARDHEIGTH 6
+#define BOARDWIDTH 6
+#define BOARDHEIGTH 4
 using namespace std; 
-// x la hang, y la cot                      // 0 0 0 0 0 0
-struct position                             // 0 * * * * 0
-{											// 0 * * * * 0
-	int x; // Toa do hang					// 0 * * * * 0
-	int y; // Toa do cot					// 0 * * * * 0
-};											// 0 * * * * 0
-struct Cell_1								// 0 * * * * 0
-{                                           // 0 0 0 0 0 0 
-	int i, j;
-	//char c = ' ';
-	char c;
+// x la hang, y la cot                   
+struct position                            
+{											
+	int x; // Toa do hang					
+	int y; // Toa do cot					
+};											
+struct Cell_1								
+{                
+	int x, y;
+	
+	char c = 1;
 	// Check Barrier
 	bool Is_Selected = 0;
 
@@ -27,4 +27,5 @@ void InitBoard(Cell_1** board);
 void DeleteBoard(Cell_1** board);
 bool Colcheck(Cell_1** board, int x1, int x2, int y);
 bool RowCheck(Cell_1** board, int y1, int y2, int x);
+bool LCheck(Cell_1** board, int x1, int xMin, int xMax, int  yMin, int yMax);
 bool Zcheck(Cell_1** board, int x1, int x2, int y1, int y2);
