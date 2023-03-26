@@ -21,6 +21,9 @@
     <ClInclude Include="InterfaceMenu_1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Credit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckNormal.cpp">
@@ -33,6 +36,9 @@
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="TestCheckNormal.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

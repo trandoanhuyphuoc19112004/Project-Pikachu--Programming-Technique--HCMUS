@@ -1,20 +1,31 @@
 ﻿#include "CheckNormal.h"
 #include "InterfaceMenu_1.h"
+#include "Credit.h"
 int main()
 {
-	CreateWindows();
-	int choice = CreateMenuGame();
-	switch (choice)
+	do
 	{
-	case 0:
-
-		break;
-	case 1:
-	{	
 		system("cls");
-		cout << "abc";
-		break;
-	}
-	}
+		CreateWindows();
+		int choice = CreateMenuGame();
+		switch (choice)
+		{
+		case 0:
+			exit(0);
+		case 1:
+		{
+			system("cls");
+			cout << "abc";
+			break;
+		}
+		case 3:
+		{
+			system("cls");
+			CreditInfo();
+			//system("Pause");
+		}
+		}
+	} while (true);
+
 	
 }
