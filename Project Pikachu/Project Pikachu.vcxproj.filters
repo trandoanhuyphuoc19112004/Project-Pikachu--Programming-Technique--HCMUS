@@ -24,6 +24,12 @@
     <ClInclude Include="Credit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Players.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckNormal.cpp">

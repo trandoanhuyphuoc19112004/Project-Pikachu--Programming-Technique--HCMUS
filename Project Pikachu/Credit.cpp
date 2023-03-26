@@ -2,7 +2,7 @@
 void CreditInfo()
 {
         SetColor(14);
-        LoadandDrawAscii("Logo.txt", 15, 30, 5);
+        LoadandDrawAscii("Logo.txt", 15, 30, 3);
         LoadandDrawAscii("Onix.txt", 15, 1, 14);
         LoadandDrawAscii("Pikachu.txt", 15, 75, 16);
         GoToXY(32, 13);

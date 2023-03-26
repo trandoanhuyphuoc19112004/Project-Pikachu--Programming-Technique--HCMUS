@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClInclude Include="CheckNormal.h" />
     <ClInclude Include="Credit.h" />
+    <ClInclude Include="NormalMap.h" />
+    <ClInclude Include="Players.h" />
     <ClInclude Include="InterfaceMenu_1.h" />
   </ItemGroup>
   <ItemGroup>

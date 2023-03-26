@@ -101,15 +101,21 @@ void HighLightMenuBar(int x, int y)
     else if (y == 18)
     {
         GoToXY(x, y);
-        cout << "       LEADERBOARD      ";
+        cout << "        LOAD GAME      ";
     }
 
     else if (y == 20)
     {
         GoToXY(x, y);
+        cout << "       LEADERBOARD      ";
+    }
+
+    else if (y == 22)
+    {
+        GoToXY(x, y);
         cout << "         CREDITS        ";
     }
-    else if (y == 22)
+    else if (y == 24)
     {
         GoToXY(x, y);
         cout << "        EXIT GAME     ";
@@ -128,15 +134,21 @@ void NoHighlightMenuBar(int x, int y)
     else if (y == 18)
     {
         GoToXY(x, y);
+        cout << "        LOAD GAME      ";
+    }
+
+    else if (y == 20)
+    {
+        GoToXY(x, y);
         cout << "       LEADERBOARD      ";
     }
     
-    else if (y == 20)
+    else if (y == 22)
     {
         GoToXY(x, y);
         cout << "         CREDITS        ";
     }
-    else if (y == 22)
+    else if (y == 24)
     {
         GoToXY(x, y);
         cout << "        EXIT GAME     ";
@@ -170,7 +182,8 @@ int CreateMenuGame()
         NoHighlightMenuBar(40, 18);
         NoHighlightMenuBar(40, 20);
         NoHighlightMenuBar(40, 22);
-        LoadandDrawAscii("Logo.txt", 15, 30, 5);
+        NoHighlightMenuBar(40, 24);
+        LoadandDrawAscii("Logo.txt", 15, 30, 3);
         LoadandDrawAscii("Onix.txt", 15, 1, 11);
         LoadandDrawAscii("Pikachu.txt", 15, 75, 13);
         bool check = true;
@@ -202,21 +215,23 @@ int CreateMenuGame()
                     {
                         Key_y -= 2;
                     }
-                    else if (key == DOWN && Key_y != 22)
+                    else if (key == DOWN && Key_y != 24)
                     {
                         Key_y += 2;
                     }
                 }
                     else if (key == 13)
                     {
- 
+
                         if (Key_y == 16)
-                            return 1;
+                        return 1;
                         if (Key_y == 18)
                             return 2;
                         if (Key_y == 20)
                             return 3;
                         if (Key_y == 22)
+                            return 4;
+                        if (Key_y == 24)
                             return 0;  
                     }
             }

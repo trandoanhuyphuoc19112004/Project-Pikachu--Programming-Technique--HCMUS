@@ -1,8 +1,11 @@
 ﻿#include "CheckNormal.h"
 #include "InterfaceMenu_1.h"
 #include "Credit.h"
+#include "Players.h"
+#include "NormalMap.h"
 int main()
 {
+	players user;
 	do
 	{
 		system("cls");
@@ -15,10 +18,12 @@ int main()
 		case 1:
 		{
 			system("cls");
-			cout << "abc";
+			PlayerInfo(user);
+			system("cls");
+			NormalMap(user);
 			break;
 		}
-		case 3:
+		case 4:
 		{
 			system("cls");
 			CreditInfo();
@@ -26,6 +31,4 @@ int main()
 		}
 		}
 	} while (true);
-
-	
 }
