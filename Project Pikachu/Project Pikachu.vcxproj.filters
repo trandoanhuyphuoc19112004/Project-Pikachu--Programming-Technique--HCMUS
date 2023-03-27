@@ -47,6 +47,12 @@
     <ClCompile Include="Credit.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="players.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalMap.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Pikachu.txt">

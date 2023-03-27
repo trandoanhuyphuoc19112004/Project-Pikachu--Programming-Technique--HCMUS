@@ -29,6 +29,8 @@
     <ClCompile Include="CheckNormal.cpp" />
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="InterfaceMenu_1.cpp" />
+    <ClCompile Include="NormalMap.cpp" />
+    <ClCompile Include="players.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TestCheckNormal.cpp" />
   </ItemGroup>
