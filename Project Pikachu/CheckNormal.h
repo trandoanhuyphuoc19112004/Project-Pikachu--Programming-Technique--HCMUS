@@ -9,13 +9,14 @@ using namespace std;
 // x la hang, y la cot                   
 struct position                            
 {											
-	int x; // Toa do hang					
-	int y; // Toa do cot					
+	int x; 			
+	int y; 				
 };											
 struct Normal_Board								
 {                
-	int x, y;
-	char c = 1;
+	int i, j;
+	char c = ' ';
+	bool Is_Selected = 0;
 };
 void InitBoard(Normal_Board** board);
 void OutputBoard(Normal_Board** board, int nRow, int nCol);

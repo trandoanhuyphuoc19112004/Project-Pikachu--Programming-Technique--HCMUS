@@ -2,13 +2,13 @@
 void InitBoard(Normal_Board** board)
 {
 	// Initializing 2d pointer array
-	for (int i = 0; i < BOARDHEIGTH + 2 ; i++)
+	for (int i = 0; i < BOARDHEIGTH  ; i++)
 	{
-		board[i] = new Normal_Board [BOARDWIDTH + 2 ];
-		for (int j = 0; j < BOARDWIDTH  + 2; j++)
+		board[i] = new Normal_Board [BOARDWIDTH];
+		for (int j = 0; j < BOARDWIDTH; j++)
 		{
-			board[i][j].x = i;
-			board[i][j].y = j;
+			board[i][j].i = i;
+			board[i][j].j = j;
 		}
 	}
 	
@@ -25,9 +25,9 @@ void InitBoard(Normal_Board** board)
 		while (time)
 		{
 			//int idx = rand() % 24;
-			int row = rand() % BOARDHEIGTH + 1 ;
-			int col = rand() % BOARDWIDTH + 1 ;
-			if (board[row][col].c == 1)
+			int row = rand() % BOARDHEIGTH  ;
+			int col = rand() % BOARDWIDTH  ;
+			if (board[row][col].c == ' ')
 			{
 				board[row][col].c = random_c;
 				time--;
