@@ -59,7 +59,7 @@ bool RowCheck(Normal_Board** board, int ymin, int ymax, int x)
 {
 	for (int i = ymin + 1; i < ymax; i++)
 	{
-		if (board[x][i].c != 1)
+		if (board[x][i].c != ' ')
 			return false;
 	}
 	return true;
@@ -68,7 +68,7 @@ bool Colcheck(Normal_Board** board, int xmin, int xmax, int y)
 {
 	for (int i = xmin + 1; i < xmax; i++)
 	{
-		if (board[i][y].c != 1)
+		if (board[i][y].c != ' ')
 			return false;
 	}
 	return true;
@@ -160,8 +160,8 @@ void ConverToNull(Normal_Board** board, int x1, int x2, int y1, int y2, int nRow
 {
 	if (CheckOverall(board, x1, x2, y1, y2, nRow, nCol))
 	{
-		board[x1][y1].c = 1;
-		board[x2][y2].c = 1;
+		board[x1][y1].c = ' ';
+		board[x2][y2].c = ' ';
 	}
 }
 bool CheckEndGame(Normal_Board** board, int nRow, int nCol)
