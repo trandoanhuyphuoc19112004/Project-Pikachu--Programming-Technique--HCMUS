@@ -10,8 +10,10 @@ int main()
 	{
 		system("cls");
 		CreateWindows();
+		
 		int choice = CreateMenuGame();
 		switch (choice)
+
 		{
 		case 0:
 			exit(0);

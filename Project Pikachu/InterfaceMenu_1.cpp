@@ -186,6 +186,8 @@ int CreateMenuGame()
         LoadandDrawAscii("Logo.txt", 15, 30, 3);
         LoadandDrawAscii("Onix.txt", 15, 1, 11);
         LoadandDrawAscii("Pikachu.txt", 15, 75, 13);
+        // Ref: https://pixabay.com/sound-effects/nintendo-song-short5-25171/
+        PlaySound(TEXT("Thememenu.wav"), NULL, SND_FILENAME | SND_ASYNC);
         bool check = true;
         int Key_y = 16, Key_x = 40;
         int Pre_y = 16;
@@ -213,10 +215,14 @@ int CreateMenuGame()
                     key = _getch();
                     if (key == UP && Key_y != 16)
                     {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        //PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         Key_y -= 2;
                     }
                     else if (key == DOWN && Key_y != 24)
                     {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                       // PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         Key_y += 2;
                     }
                 }
