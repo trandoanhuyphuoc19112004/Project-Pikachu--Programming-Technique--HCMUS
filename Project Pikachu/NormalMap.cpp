@@ -29,7 +29,8 @@ void NormalMap(players& player)
     board[curPosition.x][curPosition.y].Is_Selected = 1;
     DrawNormalMap(board);
     moveCursor(board, curPosition, selectedPos, pair, player);
-    //c = _getch();
+    checkPair(board, curPosition, selectedPos, pair, player);
+
     } while(true);
 }
 
@@ -61,33 +62,34 @@ void drawBox(Normal_Board board)
 	// Draw Box
 	SetColor(11);
 	int i1 = board.i + 1, j1 = board.j + 1;
-
-	for (int i = 0; i < 6; i++)
-	{
-		GoToXY(j1 * 13, i1 * 6 + i);
-		cout << box[i];
-	}
-	if (board.Is_Selected) 
-	{
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 112 + (board.c % 6 + 1));
-		for (int i = 1; i < 4; i++) 
-		{
-			GoToXY(j1 * 13 + 1, i1 * 6 + i);
-			cout << "       ";
-		}
-		GoToXY(j1 * 13 + 4, i1 * 6 + 2);
-		cout << board.c;
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-	}
-	// Add letter to the box
-	else
-	{
-		GoToXY(j1 * 13 + 4, i1 * 6 + 2);
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), board.c % 4 + 1);
-		cout << board.c;
-	}	
-    //
-    if (board.c == ' ')
+    if (board.c != ' ') {
+        for (int i = 0; i < 6; i++)
+        {
+            GoToXY(j1 * 13, i1 * 6 + i);
+            cout << box[i];
+        }
+        if (board.Is_Selected || board.Is_Chosen)
+        {
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 112 + (board.c % 6 + 1));
+            for (int i = 1; i < 4; i++)
+            {
+                GoToXY(j1 * 13 + 1, i1 * 6 + i);
+                cout << "       ";
+            }
+            GoToXY(j1 * 13 + 4, i1 * 6 + 2);
+            cout << board.c;
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+        }
+        // Add letter to the box
+        else
+        {
+            GoToXY(j1 * 13 + 4, i1 * 6 + 2);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), board.c % 4 + 1);
+            cout << board.c;
+        }
+        //
+    }
+    else 
     {
         for (int i = 0; i < 6; i++)
         {
@@ -102,67 +104,20 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
 { // thay x=y, y=x
     int funckey;
     funckey = _getch();
-    if (funckey == Enter && !board[pos.x][pos.y].Is_Selected)
+    if (funckey == Enter   && !board[pos.x][pos.y].Is_Chosen)
     {
         selectedPos[pair].x = pos.x;
         selectedPos[pair].y = pos.y;
-        board[pos.x][pos.y].Is_Selected = 1;
         pair++;
-        if (pair == 2)
-        {
-            if (CheckOverall(board, selectedPos[0], selectedPos[1]))
-            {
-                user.point += 50;
-                GoToXY(55, 2);
-                SetColor(11);
-                cout << "Points:" << user.point;
-                board[selectedPos[0].x][selectedPos[0].y].c = ' ';
-                board[selectedPos[1].x][selectedPos[1].y].c = ' ';
-            }
-            else
-            {
-                user.life--;
-                SetColor(11);
-                GoToXY(35, 2);
-                cout << "Life:" << user.life;
-            }
-            board[selectedPos[0].x][selectedPos[0].y].Is_Selected = 0;
-            board[selectedPos[1].x][selectedPos[1].y].Is_Selected = 0;
-            position selectedPos[] = { {-1, -1}, {-1, -1} };
-            position curPosition{ 0, 0 };
-            pair = 0;
-            for (int i = pos.x; i < BOARDHEIGTH; i++)
-            {
-                for (int j = pos.y; j < BOARDWIDTH; j++)
-                {
-                    if (board[i][j].c != ' ')
-                    {
-                        pos.y = j;
-                        pos.x = i;
-                        return;
-                    }
-                }
-            }
-            for (int i = 0; i <= pos.x; i++)
-            {
-                for (int j = 0; j <= pos.y; j++)
-                {
-                    if (board[i][j].c != ' ')
-                    {
-                        pos.y = j;
-                        pos.x = i;
-                        return;
-                    }
-                }
-            }
-        }
+        board[pos.x][pos.y].Is_Chosen = 1;
+        return;
     }
-
-    else if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) // ktra xem o nay co dang duoc chon hay khong
-        board[pos.x][pos.y].Is_Selected = 0;
-    // Tranversing the board by entering the key and save the pos
-    switch (funckey = _getch())
-    {
+    else {
+        if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) // ktra xem o nay co dang duoc chon hay khong
+            board[pos.x][pos.y].Is_Selected = 0;
+        // Tranversing the board by entering the key and save the pos
+        switch (funckey)
+        {
         case UP:
             for (int i = pos.y; i < BOARDWIDTH; i++)
             {   //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
@@ -409,6 +364,60 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
             }
         default:
             break;
+        }
     }
 }
 
+void checkPair(Normal_Board** board, position& pos, position selectedPos[2], int& pair, players& user) {
+    if (pair == 2)
+    {
+        if (CheckOverall(board, selectedPos[0], selectedPos[1]))
+        {
+            user.point += 50;
+            GoToXY(55, 2);
+            SetColor(11);
+            cout << "Points:" << user.point;
+            board[selectedPos[0].x][selectedPos[0].y].c = ' ';
+            board[selectedPos[1].x][selectedPos[1].y].c = ' ';
+        }
+        else
+        {
+            user.life--;
+            SetColor(11);
+            GoToXY(35, 2);
+            cout << "Life:" << user.life;
+        }
+        board[selectedPos[0].x][selectedPos[0].y].Is_Chosen = 0;
+        board[selectedPos[1].x][selectedPos[1].y].Is_Chosen = 0;
+        board[selectedPos[0].x][selectedPos[0].y].Is_Selected = 0;
+        board[selectedPos[1].x][selectedPos[1].y].Is_Selected = 0;
+        selectedPos[0] = { -1, -1 };
+        selectedPos[1] = { -1, -1 };
+        pair = 0;
+        for (int i = pos.x; i < BOARDHEIGTH; i++)
+        {
+            for (int j = pos.y; j < BOARDWIDTH; j++)
+            {
+                if (board[i][j].c != ' ')
+                {
+                    pos.y = j;
+                    pos.x = i;
+                    return;
+                }
+            }
+        }
+        for (int i = 0; i <= pos.x; i++)
+        {
+            for (int j = 0; j <= pos.y; j++)
+            {
+                if (board[i][j].c != ' ')
+                {
+                    pos.y = j;
+                    pos.x = i;
+                    return;
+                }
+            }
+        }
+    }
+    else return;
+}

@@ -18,6 +18,7 @@ struct Normal_Board
 	char c = ' ';
 	bool Is_Selected = 0;
 	bool isValid = 1;
+	bool Is_Chosen = 0;
 };
 void InitBoard(Normal_Board** board);
 void OutputBoard(Normal_Board** board, int nRow, int nCol);
