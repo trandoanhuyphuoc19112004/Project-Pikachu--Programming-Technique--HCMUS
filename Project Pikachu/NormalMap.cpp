@@ -65,7 +65,7 @@ void drawBox(Normal_Board board)
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 112 + (board.c % 6 + 1));
 		for (int i = 1; i < 4; i++) 
 		{
-			GoToXY(i1 * 10 + 4, j1 * 6 + i);
+			GoToXY(j1 * 13 + 1, i1 * 6 + i);
 			cout << "       ";
 		}
 		GoToXY(j1 * 13 + 4, i1 * 6 + 2);
@@ -85,45 +85,45 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
     int temp, key;
     temp = _getch();
         if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) // ktra xem o nay co dang duoc chon hay khong
-            board[pos.y][pos.x].Is_Selected = 0;
+            board[pos.x][pos.y].Is_Selected = 0;
         switch (key = _getch())
         {
         case UP:
-            for (int i = pos.x; i < BOARDWIDTH; i++) {   //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
-                for (int j = pos.y - 1; j >= 0; j--) {   //Neu khong co o hop le trong cot, chuyen sang check tiep cot ben phai cho toi cot cuoi cung
+            for (int i = pos.y; i < BOARDWIDTH; i++) {   //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
+                for (int j = pos.x - 1; j >= 0; j--) {   //Neu khong co o hop le trong cot, chuyen sang check tiep cot ben phai cho toi cot cuoi cung
                     if (board[j][i].isValid) {
-                        pos.x = i;
-                        pos.y = j;
+                        pos.y = i;
+                        pos.x = j;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.x - 1; i >= 0; i--) {      //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
-                for (int j = pos.y - 1; j >= 0; j--) {  //Neu khong co o hop le trong cot, chuyen sang check tiep cot ben trai cho toi cot dau tien
+            for (int i = pos.y - 1; i >= 0; i--) {      //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
+                for (int j = pos.x - 1; j >= 0; j--) {  //Neu khong co o hop le trong cot, chuyen sang check tiep cot ben trai cho toi cot dau tien
                     if (board[j][i].isValid) {
-                        pos.x = i;
-                        pos.y = j;
+                        pos.y = i;
+                        pos.x = j;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.x; i < BOARDWIDTH; i++) {              //Check tu o duoi cung cua cot tro len cho toi o hien tai, neu tim duoc o hop le thi gan dia chi vao pos
-                for (int j = BOARDHEIGTH - 1; j > pos.y; j--) {     //Neu ko co o hop le trong cot, chuyen sang cot ben trai
+            for (int i = pos.y; i < BOARDWIDTH; i++) {              //Check tu o duoi cung cua cot tro len cho toi o hien tai, neu tim duoc o hop le thi gan dia chi vao pos
+                for (int j = BOARDHEIGTH - 1; j > pos.x; j--) {     //Neu ko co o hop le trong cot, chuyen sang cot ben trai
                     if (board[j][i].isValid) {
-                        pos.x = i;
-                        pos.y = j;
+                        pos.y = i;
+                        pos.x = j;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.x; i >= 0; i--) {
-                for (int j = BOARDHEIGTH - 1; j > pos.y; j--) {
+            for (int i = pos.y; i >= 0; i--) {
+                for (int j = BOARDHEIGTH - 1; j > pos.x; j--) {
                     if (board[j][i].isValid) {
-                        pos.x = i;
-                        pos.y = j;
+                        pos.y = i;
+                        pos.x = j;
                         return;
                     }
                 }
@@ -131,123 +131,123 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
 
             break;
         case DOWN:
-            for (int i = pos.x; i < BOARDWIDTH; i++) {
-                for (int j = pos.y + 1; j < BOARDHEIGTH; j++) {
+            for (int i = pos.y; i < BOARDWIDTH; i++) {
+                for (int j = pos.x + 1; j < BOARDHEIGTH; j++) {
                     if (board[j][i].isValid) {
-                        pos.x = i;
-                        pos.y = j;
+                        pos.y = i;
+                        pos.x = j;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.x - 1; i >= 0; i--) {
-                for (int j = pos.y + 1; j < BOARDHEIGTH; j++) {
+            for (int i = pos.y - 1; i >= 0; i--) {
+                for (int j = pos.x + 1; j < BOARDHEIGTH; j++) {
                     if (board[j][i].isValid) {
-                        pos.x = i;
-                        pos.y = j;
+                        pos.y = i;
+                        pos.x = j;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.x; i < BOARDWIDTH; i++) {
-                for (int j = 0; j < pos.y; j++) {
+            for (int i = pos.y; i < BOARDWIDTH; i++) {
+                for (int j = 0; j < pos.x; j++) {
                     if (board[j][i].isValid) {
-                        pos.x = i;
-                        pos.y = j;
+                        pos.y = i;
+                        pos.x = j;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.x - 1; i >= 0; i--) {
-                for (int j = 0; j < pos.y; j++) {
+            for (int i = pos.y - 1; i >= 0; i--) {
+                for (int j = 0; j < pos.x; j++) {
                     if (board[j][i].isValid) {
-                        pos.x = i;
-                        pos.y = j;
+                        pos.y = i;
+                        pos.x = j;
                         return;
                     }
                 }
             }
             break;
         case LEFT:
-            for (int i = pos.y; i >= 0; i--) {
-                for (int j = pos.x - 1; j >= 0; j--) {
+            for (int i = pos.x; i >= 0; i--) {
+                for (int j = pos.y - 1; j >= 0; j--) {
                     if (board[i][j].isValid) {
-                        pos.x = j;
-                        pos.y = i;
+                        pos.y = j;
+                        pos.x = i;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.y + 1; i < BOARDHEIGTH; i++) {
-                for (int j = pos.x - 1; j >= 0; j--) {
+            for (int i = pos.x + 1; i < BOARDHEIGTH; i++) {
+                for (int j = pos.y - 1; j >= 0; j--) {
                     if (board[i][j].isValid) {
-                        pos.x = j;
-                        pos.y = i;
+                        pos.y = j;
+                        pos.x = i;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.y; i >= 0; i--) {
-                for (int j = BOARDWIDTH - 1; j > pos.x; j--) {
+            for (int i = pos.x; i >= 0; i--) {
+                for (int j = BOARDWIDTH - 1; j > pos.y; j--) {
                     if (board[i][j].isValid) {
-                        pos.x = j;
-                        pos.y = i;
+                        pos.y = j;
+                        pos.x = i;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.y + 1; i < BOARDHEIGTH; i++) {
-                for (int j = BOARDWIDTH - 1; j > pos.x; j--) {
+            for (int i = pos.x + 1; i < BOARDHEIGTH; i++) {
+                for (int j = BOARDWIDTH - 1; j > pos.y; j--) {
                     if (board[i][j].isValid) {
-                        pos.x = j;
-                        pos.y = i;
+                        pos.y = j;
+                        pos.x = i;
                         return;
                     }
                 }
             }
             break;
         case RIGHT:
-            for (int i = pos.y; i >= 0; i--) {
-                for (int j = pos.x + 1; j < BOARDWIDTH; j++) {
+            for (int i = pos.x; i >= 0; i--) {
+                for (int j = pos.y + 1; j < BOARDWIDTH; j++) {
                     if (board[i][j].isValid) {
-                        pos.x = j;
-                        pos.y = i;
+                        pos.y = j;
+                        pos.x = i;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.y + 1; i < BOARDHEIGTH; i++) {
-                for (int j = pos.x + 1; j < BOARDWIDTH; j++) {
+            for (int i = pos.x + 1; i < BOARDHEIGTH; i++) {
+                for (int j = pos.y + 1; j < BOARDWIDTH; j++) {
                     if (board[i][j].isValid) {
-                        pos.x = j;
-                        pos.y = i;
+                        pos.y = j;
+                        pos.x = i;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.y; i >= 0; i--) {
-                for (int j = 0; j < pos.x; j++) {
+            for (int i = pos.x; i >= 0; i--) {
+                for (int j = 0; j < pos.y; j++) {
                     if (board[i][j].isValid) {
-                        pos.x = j;
-                        pos.y = i;
+                        pos.y = j;
+                        pos.x = i;
                         return;
                     }
                 }
             }
 
-            for (int i = pos.y + 1; i < BOARDHEIGTH; i++) {
-                for (int j = 0; j < pos.x; j++) {
+            for (int i = pos.x + 1; i < BOARDHEIGTH; i++) {
+                for (int j = 0; j < pos.y; j++) {
                     if (board[i][j].isValid) {
-                        pos.x = j;
-                        pos.y = i;
+                        pos.y = j;
+                        pos.x = i;
                         return;
                     }
                 }
