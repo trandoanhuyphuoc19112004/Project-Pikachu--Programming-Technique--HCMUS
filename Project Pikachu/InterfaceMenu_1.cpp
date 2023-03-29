@@ -215,8 +215,6 @@ int CreateMenuGame()
                     key = _getch();
                     if (key == UP && Key_y != 16)
                     {
-                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
-                        //PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         Key_y -= 2;
                     }
                     else if (key == DOWN && Key_y != 24)

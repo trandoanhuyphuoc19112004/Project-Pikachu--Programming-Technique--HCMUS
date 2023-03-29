@@ -6,8 +6,6 @@ void NormalMap(players& player)
 	Normal_Board** board = new Normal_Board * [BOARDHEIGTH];
 	InitBoard(board);
 	char c;
-	do
-	{
 		SetColor(11);
 		GoToXY(10, 2);
 		cout << "Player:" << player.name;
@@ -25,14 +23,12 @@ void NormalMap(players& player)
 		cout << "Use arrow keys to move";
 		position selectedPos[] = { {-1, -1}, {-1, -1} };
 		position curPosition{ 0, 0 };
-        while (true) {
+        do {
             board[curPosition.x][curPosition.y].Is_Selected = 1;
             DrawNormalMap(board);
             moveCursor(board, curPosition, selectedPos);
             c = _getch();
-        }
-	} while (c != ESC); 
-
+        } while (c != ESC);
 }
 
 void DrawNormalMap(Normal_Board** board) 
@@ -89,9 +85,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
         switch (key = _getch())
         {
         case UP:
-            for (int i = pos.y; i < BOARDWIDTH; i++) {   //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
-                for (int j = pos.x - 1; j >= 0; j--) {   //Neu khong co o hop le trong cot, chuyen sang check tiep cot ben phai cho toi cot cuoi cung
-                    if (board[j][i].isValid) {
+            for (int i = pos.y; i < BOARDWIDTH; i++)
+            {   //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
+                for (int j = pos.x - 1; j >= 0; j--)
+                {   //Neu khong co o hop le trong cot, chuyen sang check tiep cot ben phai cho toi cot cuoi cung
+                    if (board[j][i].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = i;
                         pos.x = j;
                         return;
@@ -99,9 +100,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.y - 1; i >= 0; i--) {      //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
-                for (int j = pos.x - 1; j >= 0; j--) {  //Neu khong co o hop le trong cot, chuyen sang check tiep cot ben trai cho toi cot dau tien
-                    if (board[j][i].isValid) {
+            for (int i = pos.y - 1; i >= 0; i--)
+            {      //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
+                for (int j = pos.x - 1; j >= 0; j--)
+                {  //Neu khong co o hop le trong cot, chuyen sang check tiep cot ben trai cho toi cot dau tien
+                    if (board[j][i].isValid) 
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = i;
                         pos.x = j;
                         return;
@@ -109,9 +115,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.y; i < BOARDWIDTH; i++) {              //Check tu o duoi cung cua cot tro len cho toi o hien tai, neu tim duoc o hop le thi gan dia chi vao pos
-                for (int j = BOARDHEIGTH - 1; j > pos.x; j--) {     //Neu ko co o hop le trong cot, chuyen sang cot ben trai
-                    if (board[j][i].isValid) {
+            for (int i = pos.y; i < BOARDWIDTH; i++)
+            {              //Check tu o duoi cung cua cot tro len cho toi o hien tai, neu tim duoc o hop le thi gan dia chi vao pos
+                for (int j = BOARDHEIGTH - 1; j > pos.x; j--)
+                {     //Neu ko co o hop le trong cot, chuyen sang cot ben trai
+                    if (board[j][i].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = i;
                         pos.x = j;
                         return;
@@ -119,9 +130,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.y; i >= 0; i--) {
-                for (int j = BOARDHEIGTH - 1; j > pos.x; j--) {
-                    if (board[j][i].isValid) {
+            for (int i = pos.y; i >= 0; i--)
+            {
+                for (int j = BOARDHEIGTH - 1; j > pos.x; j--)
+                {
+                    if (board[j][i].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = i;
                         pos.x = j;
                         return;
@@ -131,9 +147,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
 
             break;
         case DOWN:
-            for (int i = pos.y; i < BOARDWIDTH; i++) {
-                for (int j = pos.x + 1; j < BOARDHEIGTH; j++) {
-                    if (board[j][i].isValid) {
+            for (int i = pos.y; i < BOARDWIDTH; i++)
+            {
+                for (int j = pos.x + 1; j < BOARDHEIGTH; j++)
+                {
+                    if (board[j][i].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = i;
                         pos.x = j;
                         return;
@@ -141,9 +162,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.y - 1; i >= 0; i--) {
-                for (int j = pos.x + 1; j < BOARDHEIGTH; j++) {
-                    if (board[j][i].isValid) {
+            for (int i = pos.y - 1; i >= 0; i--)
+            {
+                for (int j = pos.x + 1; j < BOARDHEIGTH; j++)
+                {
+                    if (board[j][i].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = i;
                         pos.x = j;
                         return;
@@ -151,9 +177,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.y; i < BOARDWIDTH; i++) {
-                for (int j = 0; j < pos.x; j++) {
-                    if (board[j][i].isValid) {
+            for (int i = pos.y; i < BOARDWIDTH; i++)
+            {
+                for (int j = 0; j < pos.x; j++)
+                {
+                    if (board[j][i].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = i;
                         pos.x = j;
                         return;
@@ -161,9 +192,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.y - 1; i >= 0; i--) {
-                for (int j = 0; j < pos.x; j++) {
-                    if (board[j][i].isValid) {
+            for (int i = pos.y - 1; i >= 0; i--)
+            {
+                for (int j = 0; j < pos.x; j++)
+                {
+                    if (board[j][i].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = i;
                         pos.x = j;
                         return;
@@ -172,9 +208,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
             }
             break;
         case LEFT:
-            for (int i = pos.x; i >= 0; i--) {
-                for (int j = pos.y - 1; j >= 0; j--) {
-                    if (board[i][j].isValid) {
+            for (int i = pos.x; i >= 0; i--)
+            {
+                for (int j = pos.y - 1; j >= 0; j--)
+                {
+                    if (board[i][j].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = j;
                         pos.x = i;
                         return;
@@ -182,9 +223,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.x + 1; i < BOARDHEIGTH; i++) {
-                for (int j = pos.y - 1; j >= 0; j--) {
-                    if (board[i][j].isValid) {
+            for (int i = pos.x + 1; i < BOARDHEIGTH; i++)
+            {
+                for (int j = pos.y - 1; j >= 0; j--)
+                {
+                    if (board[i][j].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = j;
                         pos.x = i;
                         return;
@@ -192,9 +238,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.x; i >= 0; i--) {
-                for (int j = BOARDWIDTH - 1; j > pos.y; j--) {
-                    if (board[i][j].isValid) {
+            for (int i = pos.x; i >= 0; i--)
+            {
+                for (int j = BOARDWIDTH - 1; j > pos.y; j--)
+                {
+                    if (board[i][j].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = j;
                         pos.x = i;
                         return;
@@ -202,9 +253,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.x + 1; i < BOARDHEIGTH; i++) {
-                for (int j = BOARDWIDTH - 1; j > pos.y; j--) {
-                    if (board[i][j].isValid) {
+            for (int i = pos.x + 1; i < BOARDHEIGTH; i++)
+            {
+                for (int j = BOARDWIDTH - 1; j > pos.y; j--)
+                {
+                    if (board[i][j].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = j;
                         pos.x = i;
                         return;
@@ -213,9 +269,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
             }
             break;
         case RIGHT:
-            for (int i = pos.x; i >= 0; i--) {
-                for (int j = pos.y + 1; j < BOARDWIDTH; j++) {
-                    if (board[i][j].isValid) {
+            for (int i = pos.x; i >= 0; i--)
+            {
+                for (int j = pos.y + 1; j < BOARDWIDTH; j++)
+                {
+                    if (board[i][j].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = j;
                         pos.x = i;
                         return;
@@ -223,9 +284,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.x + 1; i < BOARDHEIGTH; i++) {
-                for (int j = pos.y + 1; j < BOARDWIDTH; j++) {
-                    if (board[i][j].isValid) {
+            for (int i = pos.x + 1; i < BOARDHEIGTH; i++)
+            {
+                for (int j = pos.y + 1; j < BOARDWIDTH; j++)
+                {
+                    if (board[i][j].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = j;
                         pos.x = i;
                         return;
@@ -233,9 +299,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.x; i >= 0; i--) {
-                for (int j = 0; j < pos.y; j++) {
-                    if (board[i][j].isValid) {
+            for (int i = pos.x; i >= 0; i--)
+            {
+                for (int j = 0; j < pos.y; j++)
+                {
+                    if (board[i][j].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = j;
                         pos.x = i;
                         return;
@@ -243,9 +314,14 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
                 }
             }
 
-            for (int i = pos.x + 1; i < BOARDHEIGTH; i++) {
-                for (int j = 0; j < pos.y; j++) {
-                    if (board[i][j].isValid) {
+            for (int i = pos.x + 1; i < BOARDHEIGTH; i++)
+            {
+                for (int j = 0; j < pos.y; j++)
+                {
+                    if (board[i][j].isValid)
+                    {
+                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
+                        PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         pos.y = j;
                         pos.x = i;
                         return;
@@ -255,5 +331,4 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { /
         default:
             break;
         }
-    
 }
