@@ -5,4 +5,4 @@
 void DrawNormalMap(Normal_Board** board);
 void NormalMap(players& player);
 void drawBox( Normal_Board board);
-void moveCursor(Normal_Board** board, position& pos, position selectedPos[]);
+void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int& pair, players& user);

@@ -23,10 +23,11 @@ void NormalMap(players& player)
 		cout << "Use arrow keys to move";
 		position selectedPos[] = { {-1, -1}, {-1, -1} };
 		position curPosition{ 0, 0 };
+        int pair = 0;
         do {
             board[curPosition.x][curPosition.y].Is_Selected = 1;
             DrawNormalMap(board);
-            moveCursor(board, curPosition, selectedPos);
+            moveCursor(board, curPosition, selectedPos, pair, player);
             c = _getch();
         } while (c != ESC);
 }
@@ -77,9 +78,18 @@ void drawBox(Normal_Board board)
 	}	
 }
 
-void moveCursor(Normal_Board** board, position& pos, position selectedPos[]) { // thay x=y, y=x
-    int temp, key;
-    temp = _getch();
+void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int &pair, players &user) 
+{ // thay x=y, y=x
+    int funckey, key;
+    funckey = _getch();
+    if (funckey == Enter)
+    {
+        selectedPos[pair].x = pos.x;
+        selectedPos[pair].y = pos.y;
+        board[pos.x][pos.y].Is_Selected = 1;
+        pair++;
+ 
+    } else 
         if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) // ktra xem o nay co dang duoc chon hay khong
             board[pos.x][pos.y].Is_Selected = 0;
         switch (key = _getch())
