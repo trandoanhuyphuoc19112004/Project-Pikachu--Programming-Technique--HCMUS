@@ -109,62 +109,58 @@ bool Zcheck(Normal_Board** board, int xMin, int xMax, int yMin, int yMax)
 	}
 	return false;
 }
-bool CheckOverall(Normal_Board** board, int x1, int x2, int y1, int y2, int nRow, int nCol)
+bool canConnect(Normal_Board** board, int x1, int x2, int y1, int y2, int nRow, int nCol)
 {
-	if (board[x1][y1].c == board[x2][y2].c && board[x1][y1].c != '\0')
+	int xMin, yMin, xMax, yMax;
+	if (x1 == x2)
 	{
-		int xMin, yMin, xMax, yMax;
-		if (x1 == x2)
-		{
-			if (RowCheck(board, y1, y2, x1)) return true;
-			else
-			{
-				xMin = x1; xMax = x1;
-			}
-		}
-		else if (x1 > x2)
-		{
-			xMin = x2;
-			xMax = x1;
-		}
+		if (RowCheck(board, y1, y2, x1)) return true;
 		else
 		{
-			xMin = x1;
-			xMax = x2;
+			xMin = x1; xMax = x1;
 		}
-		if (y1 == y2)
-		{
-			if (Colcheck(board, x1, x2, y1)) return true;
-			else
-			{
-				yMin = y1; yMax = y1;
-			}
-		}
-		else if (y1 > y2)
-		{
-			yMin = y2;
-			yMax = y1;
-		}
-		else {
-			yMin = y1;
-			yMax = y2;
-		}
-		if (LCheck(board, xMin, xMax, yMin, yMax)) return true;
-		if (Zcheck(board, xMin, xMax, yMin, yMax)) return true;
-		if (Ucheck(board, xMin, xMax, yMin, yMax, nRow, nCol)) return true;
-		return false;
 	}
+	else if (x1 > x2)
+	{
+		xMin = x2;
+		xMax = x1;
+	}
+	else
+	{
+		xMin = x1;
+		xMax = x2;
+	}
+	if (y1 == y2)
+	{
+		if (Colcheck(board, x1, x2, y1)) return true;
+		else
+		{
+			yMin = y1; yMax = y1;
+		}
+	}
+	else if (y1 > y2)
+	{
+		yMin = y2;
+		yMax = y1;
+	}
+	else {
+		yMin = y1;
+		yMax = y2;
+	}
+	if (LCheck(board, xMin, xMax, yMin, yMax)) return true;
+	if (Zcheck(board, xMin, xMax, yMin, yMax)) return true;
+	if (Ucheck(board, xMin, xMax, yMin, yMax, nRow, nCol)) return true;
 	return false;
 }
-void ConverToNull(Normal_Board** board, int x1, int x2, int y1, int y2, int nRow, int nCol)
-{
-	if (CheckOverall(board, x1, x2, y1, y2, nRow, nCol))
-	{
-		board[x1][y1].c = ' ';
-		board[x2][y2].c = ' ';
+        
+bool CheckOverall(Normal_Board** board, position pos1, position pos2) {
+	if (board[pos1.x][pos1.y].c == board[pos2.x][pos2.y].c) {
+		if (canConnect(board, pos1.x, pos2.x, pos2.y, pos2.y, BOARDHEIGTH, BOARDWIDTH))
+			return true;
 	}
 }
-bool CheckEndGame(Normal_Board** board, int nRow, int nCol)
+
+/*bool CheckEndGame(Normal_Board** board, int nRow, int nCol)
 {
 	bool check_1 = true;
 	for (int i = 0; i < nRow; i++)
@@ -176,4 +172,4 @@ bool CheckEndGame(Normal_Board** board, int nRow, int nCol)
 	}
 	return true;
 	
-}
+}*/

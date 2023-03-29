@@ -27,6 +27,7 @@ bool RowCheck(Normal_Board** board, int ymin, int ymax, int x);
 bool LCheck(Normal_Board** board, int xMin, int xMax, int  yMin, int yMax);
 bool Zcheck(Normal_Board** board, int xMin, int xMax, int yMin, int yMax);
 bool Ucheck(Normal_Board** board, int xMin, int xMax, int yMin, int yMax, int R, int C);
-bool CheckOverall(Normal_Board** board, int x1, int x2, int y1, int y2, int nRow, int nCol);
 void ConverToNull(Normal_Board** board, int x1, int x2, int y1, int y2, int nRow, int nCol);
 bool CheckEndGame(Normal_Board** board, int nRow, int nCol);
+bool CheckOverall(Normal_Board** board, position pos1, position pos2);
+bool canConnect(Normal_Board** board, int x1, int x2, int y1, int y2, int nRow, int nCol);

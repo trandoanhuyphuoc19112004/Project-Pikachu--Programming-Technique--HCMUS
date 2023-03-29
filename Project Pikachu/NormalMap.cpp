@@ -29,8 +29,8 @@ void NormalMap(players& player)
     board[curPosition.x][curPosition.y].Is_Selected = 1;
     DrawNormalMap(board);
     moveCursor(board, curPosition, selectedPos, pair, player);
-    c = _getch();
-    } while (c != ESC);
+    //c = _getch();
+    } while(true);
 }
 
 void DrawNormalMap(Normal_Board** board) 
@@ -48,6 +48,7 @@ char box[5][10] = { {" ------- "},
 					{"|       |"},
 					{"|       |"},
 					{" ------- "} };
+
 char deletebox[5][10] = { {"         "},
                           {"         "},
                           {"         "},
@@ -99,9 +100,9 @@ void drawBox(Normal_Board board)
 
 void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int& pair, players& user)
 { // thay x=y, y=x
-    int funckey, key;
+    int funckey;
     funckey = _getch();
-    if (funckey == Enter)
+    if (funckey == Enter && !board[pos.x][pos.y].Is_Selected)
     {
         selectedPos[pair].x = pos.x;
         selectedPos[pair].y = pos.y;
@@ -109,7 +110,7 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
         pair++;
         if (pair == 2)
         {
-            if (CheckOverall(board, selectedPos[0].x, selectedPos[1].x, selectedPos[0].y, selectedPos[1].y, BOARDHEIGTH, BOARDWIDTH))
+            if (CheckOverall(board, selectedPos[0], selectedPos[1]))
             {
                 user.point += 50;
                 GoToXY(55, 2);
@@ -117,7 +118,6 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
                 cout << "Points:" << user.point;
                 board[selectedPos[0].x][selectedPos[0].y].c = ' ';
                 board[selectedPos[1].x][selectedPos[1].y].c = ' ';
-               
             }
             else
             {
@@ -158,11 +158,11 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
         }
     }
 
-        else if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) // ktra xem o nay co dang duoc chon hay khong
-            board[pos.x][pos.y].Is_Selected = 0;
+    else if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) // ktra xem o nay co dang duoc chon hay khong
+        board[pos.x][pos.y].Is_Selected = 0;
     // Tranversing the board by entering the key and save the pos
-        switch (key = _getch())
-        {
+    switch (funckey = _getch())
+    {
         case UP:
             for (int i = pos.y; i < BOARDWIDTH; i++)
             {   //Check tu o phia tren o hien tai cho toi o tren cung, neu tim duoc o hop le thi gan dia chi vao pos
@@ -409,6 +409,6 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
             }
         default:
             break;
-        }
+    }
 }
 
