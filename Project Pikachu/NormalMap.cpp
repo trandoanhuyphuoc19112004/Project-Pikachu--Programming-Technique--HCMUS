@@ -373,6 +373,8 @@ void checkPair(Normal_Board** board, position& pos, position selectedPos[2], int
     {
         if (CheckOverall(board, selectedPos[0], selectedPos[1]))
         {
+            // Ref sound: https://pixabay.com/sound-effects/game-start-6104/
+            PlaySound(TEXT("Bingo.wav"), NULL, SND_FILENAME | SND_ASYNC);
             user.point += 50;
             GoToXY(55, 2);
             SetColor(11);
