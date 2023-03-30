@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="CheckNormal.h" />
     <ClInclude Include="Credit.h" />
+    <ClInclude Include="EndingBackground.h" />
     <ClInclude Include="NormalMap.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="InterfaceMenu_1.h" />
@@ -28,6 +29,7 @@
   <ItemGroup>
     <ClCompile Include="CheckNormal.cpp" />
     <ClCompile Include="Credit.cpp" />
+    <ClCompile Include="EndingBackground.cpp" />
     <ClCompile Include="InterfaceMenu_1.cpp" />
     <ClCompile Include="NormalMap.cpp" />
     <ClCompile Include="players.cpp" />

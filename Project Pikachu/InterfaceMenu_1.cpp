@@ -178,6 +178,7 @@ void LoadandDrawAscii(string filename, int line, int x, int y)
 }
 int CreateMenuGame()
 {
+    system("cls");
         NoHighlightMenuBar(40, 16);
         NoHighlightMenuBar(40, 18);
         NoHighlightMenuBar(40, 20);

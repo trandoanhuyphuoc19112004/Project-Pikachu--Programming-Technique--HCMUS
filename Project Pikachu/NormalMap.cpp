@@ -1,5 +1,6 @@
 #include"CheckNormal.h"
 #include"NormalMap.h"
+#include "EndingBackground.h"
 void NormalMap(players& player)
 {
 	system("cls");
@@ -24,14 +25,21 @@ void NormalMap(players& player)
 	position selectedPos[] = { {-1, -1}, {-1, -1} };
 	position curPosition{ 0, 0 };
     int pair = 0;
+    int Is_Game = 1;
     do
     {
+    if (player.life < 0)
+    {
+      Is_Game = LoseBackGround(player);
+          return;
+    }
+
     board[curPosition.x][curPosition.y].Is_Selected = 1;
     DrawNormalMap(board);
     moveCursor(board, curPosition, selectedPos, pair, player);
     checkPair(board, curPosition, selectedPos, pair, player);
-
     } while(true);
+    return;
 }
 
 void DrawNormalMap(Normal_Board** board) 

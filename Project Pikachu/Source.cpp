@@ -3,6 +3,7 @@
 #include "Credit.h"
 #include "Players.h"
 #include "NormalMap.h"
+#include "EndingBackground.h"
 int main()
 {
 	players user;
@@ -19,10 +20,14 @@ int main()
 			exit(0);
 		case 1:
 		{
+			
 			system("cls");
 			PlayerInfo(user);
 			system("cls");
 			NormalMap(user);
+			LoseBackGround(user);
+		
+		//	WinBackGround(user);
 			break;
 		}
 		case 4:
