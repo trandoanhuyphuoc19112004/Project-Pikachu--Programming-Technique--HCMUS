@@ -1,7 +1,8 @@
 #include"CheckNormal.h"
 #include"NormalMap.h"
 #include "EndingBackground.h"
-void NormalMap(players& player)
+#include "BinIO.h"
+void NormalMap(players& player, int& flag)
 {
 	system("cls");
 	Normal_Board** board = new Normal_Board * [BOARDHEIGTH];
@@ -22,23 +23,33 @@ void NormalMap(players& player)
 	cout << "Press Enter to choose";
 	GoToXY(30, 36);
 	cout << "Use arrow keys to move";
-	position selectedPos[] = { {-1, -1}, {-1, -1} };
-	position curPosition{ 0, 0 };
+	position selectedPos[2] = { {-1, -1}, {-1, -1} };
+    position CurPos;
+    CurPos.x = 0;
+    CurPos.y = 0;
     int pair = 0;
-    int Is_Game = 1;
-    do
+    while (player.life >= 0 && flag >= 0)
     {
+    board[CurPos.x][CurPos.y].Is_Selected = 1;
+    DrawNormalMap(board);
+    moveCursor(board, CurPos, selectedPos, pair, player, flag);
+    checkPair(board, CurPos, selectedPos, pair, player);
+    } 
+    // Check lose 
     if (player.life < 0)
     {
-      Is_Game = LoseBackGround(player);
-          return;
+        for (int i = 0; i < BOARDHEIGTH; i++)
+        {
+            for (int j = 0; j < BOARDWIDTH; j++)
+            {
+                board[i][j].c = ' ';
+            }
+        }
+        flag = 0;
+        SaveFile("Leaderboard.bin", player);
     }
-
-    board[curPosition.x][curPosition.y].Is_Selected = 1;
     DrawNormalMap(board);
-    moveCursor(board, curPosition, selectedPos, pair, player);
-    checkPair(board, curPosition, selectedPos, pair, player);
-    } while(true);
+    
     return;
 }
 
@@ -58,11 +69,13 @@ char box[5][10] = { {" ------- "},
 					{"|       |"},
 					{" ------- "} };
 
-char deletebox[5][10] = { {"         "},
-                          {"         "},
-                          {"         "},
-                          {"         "},
-                          {"         "} };
+
+    char deletebox[5][10] ={ {"         "},
+                             {"         "},
+                             {"         "},
+                             {"         "},
+                             {"         "} };
+
 
 // Toa do trong mang 2 chieu nguoc voi toa do trong ham GotoXY
 void drawBox(Normal_Board board) 
@@ -70,7 +83,8 @@ void drawBox(Normal_Board board)
 	// Draw Box
 	SetColor(11);
 	int i1 = board.i + 1, j1 = board.j + 1;
-    if (board.c != ' ') {
+    if (board.c != ' ') 
+    {
         for (int i = 0; i < 6; i++)
         {
             GoToXY(j1 * 13, i1 * 6 + i);
@@ -78,6 +92,7 @@ void drawBox(Normal_Board board)
         }
         if (board.Is_Selected || board.Is_Chosen)
         {
+            Sleep(0);
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 112 + (board.c % 6 + 1));
             for (int i = 1; i < 4; i++)
             {
@@ -92,26 +107,35 @@ void drawBox(Normal_Board board)
         else
         {
             GoToXY(j1 * 13 + 4, i1 * 6 + 2);
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), board.c % 4 + 1);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), board.c % 8 + 1);
             cout << board.c;
         }
         //
     }
     else 
     {
+        // Choose suitable pair and delete box 
         for (int i = 0; i < 6; i++)
         {
             GoToXY(j1 * 13, i1 * 6 + i);
+           // Sleep(50);
             cout << deletebox[i];
+            //Sleep(10);
         }
+       
     }
 }
 
 
-void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int& pair, players& user)
-{ // thay x=y, y=x
+void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int& pair, players& user, int &flag)
+{ 
     int funckey;
     funckey = _getch();
+    if (funckey == ESC)
+    {
+        flag = -1; // exit game 
+        return; 
+    }
     if (funckey == Enter   && !board[pos.x][pos.y].Is_Chosen)
     {
         selectedPos[pair].x = pos.x;
@@ -121,7 +145,7 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
         return;
     }
     else {
-        if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) // ktra xem o nay co dang duoc chon hay khong
+        if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) 
             board[pos.x][pos.y].Is_Selected = 0;
         // Tranversing the board by entering the key and save the pos
         switch (funckey)

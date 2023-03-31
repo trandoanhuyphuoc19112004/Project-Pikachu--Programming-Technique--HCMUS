@@ -14,7 +14,6 @@ int LoseBackGround(players& player)
 	cout << "Point:" << player.point;
 	GoToXY(40, 22);
 	cout << "Press any key to continue";
-	player.life = 3;
 	char c;
 	c = _getch();
 	return 0;

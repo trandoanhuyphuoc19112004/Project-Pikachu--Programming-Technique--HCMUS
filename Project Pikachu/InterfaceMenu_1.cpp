@@ -85,7 +85,7 @@ void CreateWindows()
     setWindowSizeAndPos();
     SetConsoleTitle(L"Pikachu");
     HideCursor(0);
-    DisableCtrButton(1, 1, 1);
+    DisableCtrButton(0, 0, 1);
     HideScrollBar();
     
 }
@@ -184,6 +184,7 @@ int CreateMenuGame()
         NoHighlightMenuBar(40, 20);
         NoHighlightMenuBar(40, 22);
         NoHighlightMenuBar(40, 24);
+        SetColor(14);
         LoadandDrawAscii("Logo.txt", 15, 30, 3);
         LoadandDrawAscii("Onix.txt", 15, 1, 11);
         LoadandDrawAscii("Pikachu.txt", 15, 75, 13);
