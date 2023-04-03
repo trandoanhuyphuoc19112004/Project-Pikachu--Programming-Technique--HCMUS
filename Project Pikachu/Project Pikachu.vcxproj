@@ -29,6 +29,7 @@
     <ClInclude Include="Players.h" />
     <ClInclude Include="InterfaceMenu_1.h" />
     <ClInclude Include="Struct.h" />
+    <ClInclude Include="Tutorial.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckHard.cpp" />
@@ -41,6 +42,7 @@
     <ClCompile Include="players.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="BinIO.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Logo.txt" />

@@ -7,6 +7,7 @@
 #include "BinIO.h"
 #include "CheckHard.h"
 #include "HardMap.h"
+#include "Tutorial.h"
 int main()
 {
 	players user;
@@ -41,9 +42,15 @@ int main()
 			HardMap(user, flag);
 			// Esc do nothing
 			break;
-
+				
 		}
 		case 3:
+		{
+			system("cls");
+			Tutorial();
+			break;
+		}
+		case 4:
 		{
 			
 			system("cls");
@@ -51,7 +58,7 @@ int main()
 			break;
 			
 		}
-		case 4:
+		case 5:
 		{
 			system("cls");
 			CreditInfo();
