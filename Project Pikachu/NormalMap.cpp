@@ -57,6 +57,21 @@ void drawBox(Normal_Board board, int color)
            cout << deletebox[i];
        }
     }
+    if (board.movesuggest)
+    {
+
+        // Set white in box selected or chosen
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+        for (int i = 1; i < 4; i++)
+        {
+            GoToXY(j1 * 13 + 1, i1 * 6 + i);
+            cout << "       ";
+        }
+        GoToXY(j1 * 13 + 4, i1 * 6 + 2);
+        cout << board.c;
+        // The leter in white box is black 
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+    }
 
 }
 void checkPair(Normal_Board** board, position& pos, position selectedPos[2], int& pair, players& user)
@@ -110,11 +125,33 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
     }
     if (funckey == TAB && help > 0) // Use help 2 times
     {
-        HelpSuggestion(board);
+        position pos1 = { -1, -1 };
+        position pos2 = { -1, -1 };
+        HelpSuggestion(board, pos1, pos2);
+        GoToXY(10, 0);
+        //cout << pos1.x << pos1.y << pos2.x << pos2.y << endl;
         help--;
         GoToXY(65, 2);
         SetColor(11);
         cout << "Help:" << help;
+        if (pos1.x != -1 && pos1.y != -1 && pos2.x != -1 && pos2.y != -1)
+        {
+            board[pos1.x][pos1.y].movesuggest = 1;
+            board[pos2.x][pos2.y].movesuggest = 1;
+            drawBox(board[pos1.x][pos1.y], 112);
+            Sleep(300);
+            drawBox(board[pos2.x][pos2.y], 112);
+            Sleep(300);
+            board[pos1.x][pos1.y].movesuggest = 0;
+            board[pos2.x][pos2.y].movesuggest = 0;
+            pos1 = { -1, -1 };
+            pos2 = { -1, -1 };
+
+        }
+        
+            
+      
+        return;
     }
     if (funckey == Enter   && !board[pos.x][pos.y].Is_Chosen) // The point is entered but no ever chosen
     {

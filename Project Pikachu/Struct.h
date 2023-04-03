@@ -21,6 +21,7 @@ struct Normal_Board
 	bool Is_Selected = 0;
 	bool isValid = 1;
 	bool Is_Chosen = 0;
+	bool movesuggest = 0;
 };
 
 struct Hard_Board

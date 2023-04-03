@@ -18,12 +18,12 @@ void LoadFile(string filename, players user)
 	ifstream filein;
 	filein.open(filename, ios::binary | ios::in);
 	filein.seekg(0, ios::end);
-	int num = filein.tellg() / 38;
+	int num = filein.tellg() / 40;
 	filein.seekg(0, ios::beg);
 	players* ptr = new players[num];
 	for (int i = 0; i < num; i++)
 	{
-		filein.read((char*)&ptr[i],38);
+		filein.read((char*)&ptr[i], sizeof(players));
 	}
 	for (int i = 0; i < num; i++)
 	{

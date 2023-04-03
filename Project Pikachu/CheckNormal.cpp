@@ -66,6 +66,8 @@ bool colCheck(Normal_Board** board, int xmin, int xmax, int y)
 }
 bool LCheck(Normal_Board** board, int xMin, int xMax, int  yMin, int yMax)
 {
+	if (xMin == xMax && yMin == yMax)
+		return false;
 	if (rowCheck(board, yMin, yMax + 1, xMin) && colCheck(board, xMin - 1, xMax, yMax)) return true;
 	if (rowCheck(board, yMin - 1, yMax, xMax) && colCheck(board, xMin, xMax + 1, yMin)) return true;
 	if (rowCheck(board, yMin, yMax + 1, xMax) && colCheck(board, xMin, xMax + 1, yMax)) return true;
@@ -74,6 +76,8 @@ bool LCheck(Normal_Board** board, int xMin, int xMax, int  yMin, int yMax)
 }
 bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 {
+	if (x1 == x2 && y1 == y2)
+		return false;
 	int xMin, xMax, yMin, yMax;
 	int xTmp1, xTmp2, yTmp1, yTmp2;
 	if (x1 < x2) {
@@ -81,6 +85,9 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		xMax = x2;
 		yTmp1 = y1;					//yTmp1 se lay toa do Y cua xMin
 		yTmp2 = y2;					//yTmp2 se lay toa do Y cua xMax
+	}
+	else if (x1 == x2) {
+		xMin = x1; xMax = x2; yTmp1 = y1; yTmp2 = y2;
 	}
 	else {
 		xMin = x2;
@@ -120,6 +127,9 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		xTmp1 = x1;					//xTmp1 se lay toa do X cua yMin
 		xTmp2 = x2;					//xTmp2 se lay toa do X cua yMax
 	}
+	else if (y1 == y2) {
+		yMin = y1; yMax = y2; xTmp1 = x1; xTmp2 = x2;
+	}
 	else {
 		yMin = x2;
 		yMax = x1;
@@ -127,7 +137,7 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		xTmp2 = x1;
 	}
 	if (yMin == 0) {
-		if (rowCheck(board, 0, yMax	, xTmp2)) return true;
+		if (rowCheck(board, -1, yMax, xTmp2)) return true;
 	}
 	if (yMax == BOARDWIDTH - 1) {
 		if (rowCheck(board, yMin, BOARDWIDTH, xTmp1)) return true;
@@ -158,9 +168,10 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 	}
 	return false;
 }
-
 bool Zcheck(Normal_Board** board, int xMin, int xMax, int yMin, int yMax)
 {
+	if (xMin == xMax && yMin == yMax)
+		return false;
 	for (int i = yMin + 1; i <= yMax; i++) {
 		if (rowCheck(board, yMin, i, xMin) && colCheck(board, xMin - 1, xMax + 1, i) && rowCheck(board, i - 1, yMax, xMax)) return true;
 		if (rowCheck(board, yMin, i, xMax) && colCheck(board, xMin - 1, xMax + 1, i) && rowCheck(board, i - 1, yMax, xMin)) return true;
@@ -276,9 +287,26 @@ bool IsMoveExist(Normal_Board** board)
 	delete[] posarr;
 	return false;
 }
-void HelpSuggestion(Normal_Board** board)
+void  HelpSuggestion(Normal_Board** board, position &pos1, position &pos2)
 {
-	
+	for (int i = 0; i < BOARDHEIGTH; i++)
+		for (int j = 0; j < BOARDWIDTH; j++)
+		{
+			if (board[i][j].c == ' ')
+				continue;
+			for (int g = 0; g < BOARDHEIGTH; g++)
+				for (int h = 0; h < BOARDWIDTH; h++)
+				{
+					if (CheckOverall(board, { i,j }, { g,h }) && i!=g && g!=h)
+					{
+						pos1 = { i,j };
+						pos2 = { g,h };
+						return; 
+					}
+				}
+		}
+}
+	/*
 	for (char check = 'A'; check <= 'Z'; check++)
 	{
 		int pair = 0;
@@ -314,4 +342,5 @@ void HelpSuggestion(Normal_Board** board)
 			}
 		}
 	}
-}
+	*/
+
