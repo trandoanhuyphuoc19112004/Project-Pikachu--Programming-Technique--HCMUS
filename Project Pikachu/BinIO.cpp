@@ -7,7 +7,7 @@ void SaveFile(string filename, players user)
 	{
 		return;
 	}
-	fileout.write((char*)&user, 38);
+	fileout.write((char*)&user, sizeof(players));
 	fileout.close();
 }
 void LoadFile(string filename, players user)
@@ -23,7 +23,7 @@ void LoadFile(string filename, players user)
 	players* ptr = new players[num];
 	for (int i = 0; i < num; i++)
 	{
-		filein.read((char*)&ptr[i], 38);
+		filein.read((char*)&ptr[i],38);
 	}
 	for (int i = 0; i < num; i++)
 	{

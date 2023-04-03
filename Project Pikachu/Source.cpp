@@ -47,7 +47,9 @@ int main()
 		{
 			
 			system("cls");
+			//cout << sizeof(players);
 			LoadFile("leaderboard.bin", user);
+			system("Pause");
 			break;
 			
 		}

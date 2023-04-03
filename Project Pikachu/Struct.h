@@ -30,3 +30,4 @@ struct Hard_Board
 	char c = ' ';
 	Hard_Board* next;
 };
+

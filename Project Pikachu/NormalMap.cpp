@@ -102,6 +102,7 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
 { 
     int funckey;
     funckey = _getch();
+   
     if (funckey == ESC)
     {
         FlagCheckExit = -1; // Mark flag exit game 
@@ -109,7 +110,7 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
     }
     if (funckey == TAB && help > 0) // Use help 2 times
     {
-       // HelpSuggestion(board);
+        HelpSuggestion(board);
         help--;
         GoToXY(65, 2);
         SetColor(11);

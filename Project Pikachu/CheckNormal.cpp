@@ -38,17 +38,7 @@ void InitBoard(Normal_Board** board)
 	}
 
 }
-void OutputBoard(Normal_Board** board, int nRow, int nCol)
-{
-	for (int i = 0; i < nRow; i++)
-	{
-		for (int j = 0; j < nCol; j++)
-		{
-			cout << board[i][j].c << " ";
-		}
-		cout << endl;
-	}
-}
+
 void DeleteBoard(Normal_Board** board)
 {
 	for (int i = 0; i < BOARDHEIGTH; i++)
@@ -286,24 +276,29 @@ bool IsMoveExist(Normal_Board** board)
 	delete[] posarr;
 	return false;
 }
-/*
 void HelpSuggestion(Normal_Board** board)
 {
+	
 	for (char check = 'A'; check <= 'Z'; check++)
 	{
 		int pair = 0;
-		position markarr[2] = { {0,0}, {0,0} };
+		position* markarr = new position[2];
 		for (int i = 0; i < BOARDHEIGTH; i++)
 		{
 			for (int j = 0; j < BOARDWIDTH; j++)
 			{
-				if (board[i][j].c == check && pair <= 1)
+				
+				if (pair <= 1)
 				{
-					markarr[pair].x = i;
-					markarr[pair].y = j;
-					pair++;
+					if (board[i][j].c == check)
+					{
+						markarr[pair++].x = i;
+						markarr[pair++].y = j;
+						GoToXY(10, 0);
+						cout << i << j << endl;
+					}
 				}
-				//else if (canConnect(board, markarr[0].x, markarr[1].x, markarr[0].y, markarr[1].y))
+				else if (canConnect(board, markarr[0].x, markarr[1].x, markarr[0].y, markarr[1].y))
 				{
 					drawBox(board[markarr[0].x][markarr[0].y], 80);
 					Sleep(300);
@@ -311,9 +306,12 @@ void HelpSuggestion(Normal_Board** board)
 					Sleep(300);
 					return;
 				}
-				//else break;
+				else
+				{
+					delete[] markarr;
+					break;
+				}
 			}
 		}
 	}
 }
-*/
