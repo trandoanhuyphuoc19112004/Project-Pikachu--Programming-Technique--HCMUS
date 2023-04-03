@@ -36,6 +36,15 @@
     <ClInclude Include="BinIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckHard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HardMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckNormal.cpp">
@@ -45,9 +54,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InterfaceMenu_1.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TestCheckNormal.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Credit.cpp">
@@ -63,6 +69,12 @@
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="BinIO.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckHard.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HardMap.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

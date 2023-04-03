@@ -13,6 +13,7 @@ using namespace std;
 #define DOWN 80
 #define LEFT 75
 #define RIGHT 77
+#define TAB 9
 // Customize size of console
 void HideScrollBar();
 void setWindowSizeAndPos();

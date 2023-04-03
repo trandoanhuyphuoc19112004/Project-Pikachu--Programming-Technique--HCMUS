@@ -29,12 +29,23 @@ void LoadFile(string filename, players user)
 	{
 		for (int j = i + 1; j < num; j++)
 		{
-			if (ptr[i].point <= ptr[j].point)
+			if (ptr[i].point < ptr[j].point)
 			{
 				players temp;
 				temp = ptr[i];
 				ptr[i] = ptr[j];
 				ptr[j] = temp;
+			}
+			// If same point, compare life
+			else if (ptr[i].point == ptr[j].point)
+			{
+				if (ptr[i].life < ptr[j].life)
+				{
+					players temp;
+					temp = ptr[i];
+					ptr[i] = ptr[j];
+					ptr[j] = temp;
+				}
 			}
 		}
 	}

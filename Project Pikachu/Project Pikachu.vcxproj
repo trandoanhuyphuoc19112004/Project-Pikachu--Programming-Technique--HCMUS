@@ -19,24 +19,28 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CheckHard.h" />
     <ClInclude Include="CheckNormal.h" />
     <ClInclude Include="Credit.h" />
     <ClInclude Include="EndingBackground.h" />
     <ClInclude Include="BinIO.h" />
+    <ClInclude Include="HardMap.h" />
     <ClInclude Include="NormalMap.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="InterfaceMenu_1.h" />
+    <ClInclude Include="Struct.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CheckHard.cpp" />
     <ClCompile Include="CheckNormal.cpp" />
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="EndingBackground.cpp" />
+    <ClCompile Include="HardMap.cpp" />
     <ClCompile Include="InterfaceMenu_1.cpp" />
     <ClCompile Include="NormalMap.cpp" />
     <ClCompile Include="players.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="BinIO.cpp" />
-    <ClCompile Include="TestCheckNormal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Logo.txt" />

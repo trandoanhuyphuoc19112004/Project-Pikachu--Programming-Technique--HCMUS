@@ -95,13 +95,13 @@ void HighLightMenuBar(int x, int y)
     if (y == 16)
     {
         GoToXY(x, y);
-        cout << "        PLAY GAME      ";
+        cout << "       NORMAL MODE      ";
     }
 
     else if (y == 18)
     {
         GoToXY(x, y);
-        cout << "        LOAD GAME      ";
+        cout << "        HARD MODE      ";
     }
 
     else if (y == 20)
@@ -128,13 +128,13 @@ void NoHighlightMenuBar(int x, int y)
     if (y == 16)
     {
         GoToXY(x, y);
-        cout << "        PLAY GAME      ";
+        cout << "       NORMAL MODE      ";
     }
     
     else if (y == 18)
     {
         GoToXY(x, y);
-        cout << "        LOAD GAME      ";
+        cout << "        HARD MODE       ";
     }
 
     else if (y == 20)

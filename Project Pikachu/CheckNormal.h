@@ -3,32 +3,17 @@
 #include <ctime>
 #include <string>
 #include <cstdlib>
-#define BOARDWIDTH 6
-#define BOARDHEIGTH 4
-using namespace std; 
-// x la hang, y la cot                   
-struct position                            
-{											
-	int x; 			
-	int y; 				
-};											
-struct Normal_Board								
-{                
-	int i, j;
-	char c = ' ';
-	bool Is_Selected = 0;
-	bool isValid = 1;
-	bool Is_Chosen = 0;
-};
+#include "Struct.h"
 void InitBoard(Normal_Board** board);
 void OutputBoard(Normal_Board** board, int nRow, int nCol);
 void DeleteBoard(Normal_Board** board);
-bool Colcheck(Normal_Board** board, int xmin, int xmax, int y);
-bool RowCheck(Normal_Board** board, int ymin, int ymax, int x);
+bool colCheck(Normal_Board** board, int xmin, int xmax, int y);
+bool rowCheck(Normal_Board** board, int ymin, int ymax, int x);
 bool LCheck(Normal_Board** board, int xMin, int xMax, int  yMin, int yMax);
 bool Zcheck(Normal_Board** board, int xMin, int xMax, int yMin, int yMax);
-bool Ucheck(Normal_Board** board, int xMin, int xMax, int yMin, int yMax, int R, int C);
-void ConverToNull(Normal_Board** board, int x1, int x2, int y1, int y2, int nRow, int nCol);
-bool CheckEndGame(Normal_Board** board, int nRow, int nCol);
+bool Ucheck(Normal_Board** board, int xMin, int xMax, int yMin, int yMax);
 bool CheckOverall(Normal_Board** board, position pos1, position pos2);
-bool canConnect(Normal_Board** board, int x1, int x2, int y1, int y2, int nRow, int nCol);
+bool canConnect(Normal_Board** board, int x1, int x2, int y1, int y2);
+bool CheckWin(Normal_Board** board);
+bool IsMoveExist(Normal_Board** board);
+void HelpSuggestion(Normal_Board** board);

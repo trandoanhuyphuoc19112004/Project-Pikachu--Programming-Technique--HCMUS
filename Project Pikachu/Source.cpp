@@ -5,6 +5,8 @@
 #include "NormalMap.h"
 #include "EndingBackground.h"
 #include "BinIO.h"
+#include "CheckHard.h"
+#include "HardMap.h"
 int main()
 {
 	players user;
@@ -25,11 +27,21 @@ int main()
 			PlayerInfo(user, flag);
 			system("cls");
 			NormalMap(user,flag);
-			if (!flag)
-			LoseBackGround(user);
 			// Esc do nothing
 			break;
 		
+		}
+		case 2:
+		{
+
+			int flag = 0;
+			system("cls");
+			PlayerInfo(user, flag);
+			system("cls");
+			HardMap(user, flag);
+			// Esc do nothing
+			break;
+
 		}
 		case 3:
 		{
