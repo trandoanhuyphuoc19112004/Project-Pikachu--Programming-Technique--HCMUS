@@ -1,5 +1,5 @@
 #include"CheckHard.h"
-
+#include"HardMap.h"
 void push(Hard_Board*& head, Hard_Board* data) {
 	if (head == NULL) {
 		head = data;
@@ -252,3 +252,83 @@ bool uCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 		}
 	}
 }
+
+bool canConnectZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
+	if (x1 == x2)
+	{
+		if ((x1 == 0) || (x2 == BOARDHEIGTH - 1)) return true;
+		else if (y1 < y2) {
+			if (rowCheckZ(board, y1, y2, x1)) return true;
+		}
+		else {
+			if (rowCheckZ(board, y2, y1, x1)) return true;
+		}
+	}
+	if (y1 == y2)
+	{
+		if ((y1 == 0) || (y1 == BOARDWIDTH - 1)) return true;
+		else if (x1 < x2) {
+			if (colCheckZ(board, x1, x2, y1)) return true;
+		}
+		else {
+			if (colCheckZ(board, x2, x1, y1)) return true;
+		}
+	}
+	if (lCheckZ(board, x1, x2, y1, y2)) return true;
+	if (zCheckZ(board, x1, x2, y1, y2)) return true;
+	if (uCheckZ(board, x1, x2, y1, y2)) return true;
+}
+
+void deleteNode(Hard_Board** board, int x, int y) {
+	Hard_Board* tmp = findNode(board, x, y);
+	if (y == 0) {
+		if (board[x]->next == NULL) {
+			removeBox(x, y);
+			board[x] == NULL;
+			return;
+		}
+		board[x]->c = tmp->next->c;
+		tmp = board[x]->next;
+		if (tmp->next == NULL) {
+			removeBox(tmp->i, tmp->j);
+			delete tmp;
+			board[x]->next = NULL;
+		}
+		else {
+			while (tmp->next->next != NULL) {
+				tmp->c = tmp->next->c;
+				tmp = tmp->next;
+			}
+			tmp->c = tmp->next->c;
+			removeBox(tmp->next->i, tmp->next->j);
+			delete tmp->next;
+			tmp->next = NULL;
+		}
+	}
+	else if (tmp->next != NULL) {
+		while (tmp->next->next != NULL) {
+			tmp->c = tmp->next->c;
+			tmp = tmp->next;
+		}
+		tmp->c = tmp->next->c;
+		removeBox(tmp->next->i, tmp->next->j);
+		delete tmp->next;
+		tmp->next = NULL;
+	}
+	else {
+		removeBox(tmp->next->i, tmp->next->j);
+		delete tmp->next;
+		tmp = findNode(board, x, y - 1);
+		tmp->next = NULL;
+	}
+}
+
+bool checkOverallZ(Hard_Board** board, position p1, position p2) {
+	if (findNode(board, p1.x, p1.y)->c == findNode(board, p2.x, p2.y)->c) {
+		if (canConnectZ(board, p1.x, p2.x, p1.y, p2.y)) {
+			return true;
+		}
+	}
+	return false;
+}
+

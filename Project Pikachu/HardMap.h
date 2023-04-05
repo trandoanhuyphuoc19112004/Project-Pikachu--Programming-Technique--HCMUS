@@ -4,7 +4,9 @@
 #include "CheckHard.h"
 #include "CheckNormal.h"
 
-void DrawHardMapZ(Hard_Board** board);
+void DrawHardMap(Hard_Board** board);
 void drawBoxZ(Hard_Board board);
-void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int& pair, players& user, int& FlagCheckExit, int& help);
-void HardMap(players& player, int& FlagCheckExit);
+void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int& pair, players& user);
+void HardMap(players& player);
+void removeBox(int x, int y);
+void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int& pair, players& user);

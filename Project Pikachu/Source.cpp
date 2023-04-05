@@ -39,7 +39,7 @@ int main()
 			system("cls");
 			PlayerInfo(user, flag);
 			system("cls");
-			HardMap(user, flag);
+			HardMap(user);
 			// Esc do nothing
 			break;
 				
