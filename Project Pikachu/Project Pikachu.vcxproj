@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="CheckHard.h" />
     <ClInclude Include="CheckNormal.h" />
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="Credit.h" />
     <ClInclude Include="EndingBackground.h" />
     <ClInclude Include="BinIO.h" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <ClCompile Include="CheckHard.cpp" />
     <ClCompile Include="CheckNormal.cpp" />
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="EndingBackground.cpp" />
     <ClCompile Include="HardMap.cpp" />
@@ -42,12 +44,18 @@
     <ClCompile Include="players.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="BinIO.cpp" />
+    <ClCompile Include="Source1.cpp" />
     <ClCompile Include="Tutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="BG.txt" />
+    <Text Include="LeaderBoard_Logo.txt" />
     <Text Include="Logo.txt" />
+    <Text Include="LoseBG.txt" />
     <Text Include="Onix.txt" />
     <Text Include="Pikachu.txt" />
+    <Text Include="Trophy_1.txt" />
+    <Text Include="Winbackground.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Leaderboard.bin" />

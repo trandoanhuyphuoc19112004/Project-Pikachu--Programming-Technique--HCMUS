@@ -1,5 +1,6 @@
 #pragma once
 #include "InterfaceMenu_1.h"
+#include "CheckNormal.h"
 #include <iostream>
 #include <string.h>
 #include <fstream>
@@ -11,4 +12,5 @@ struct players
 	int life = 3; // 4 bytes
 	int point = 0; // 4 bytes 
 };
-void PlayerInfo(players& player, int &flag);
+
+string PlayerInfo(players& player);

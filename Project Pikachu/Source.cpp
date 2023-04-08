@@ -8,6 +8,7 @@
 #include "CheckHard.h"
 #include "HardMap.h"
 #include "Tutorial.h"
+#include "Clock.h"
 int main()
 {
 	players user;
@@ -22,32 +23,32 @@ int main()
 			exit(0);
 		case 1:
 		{
-			
-			int flag = 0;
+			int flag = -1;
 			system("cls");
-			PlayerInfo(user, flag);
+			string s;
+			s = PlayerInfo(user);
 			system("cls");
-			NormalMap(user,flag);
+			NormalMap(user);
 			// Esc do nothing
 			break;
-		
+
 		}
 		case 2:
 		{
 
 			int flag = 0;
 			system("cls");
-			PlayerInfo(user, flag);
+			PlayerInfo(user);
 			system("cls");
 			HardMap(user);
 			// Esc do nothing
 			break;
-				
+
 		}
 		case 3:
 		{
-			system("cls");
-			Tutorial();
+			
+			//Tutorial();
 			break;
 		}
 		case 4:
@@ -62,7 +63,6 @@ int main()
 		{
 			system("cls");
 			CreditInfo();
-			//system("Pause");
 		}
 		}
 	} while (true);

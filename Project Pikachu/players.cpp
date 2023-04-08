@@ -1,5 +1,6 @@
 #include "Players.h"
-void PlayerInfo(players& player, int &flag)
+
+string PlayerInfo(players& player)
 {
 	string s;
 	do
@@ -17,5 +18,5 @@ void PlayerInfo(players& player, int &flag)
 		player.point = 0;
 		HideCursor(0);
 	} while (s == "");
-		
+	return s;
 }

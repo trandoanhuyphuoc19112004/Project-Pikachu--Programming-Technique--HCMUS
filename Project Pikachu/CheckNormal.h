@@ -15,5 +15,4 @@ bool Ucheck(Normal_Board** board, int xMin, int xMax, int yMin, int yMax);
 bool CheckOverall(Normal_Board** board, position pos1, position pos2);
 bool canConnect(Normal_Board** board, int x1, int x2, int y1, int y2);
 bool CheckWin(Normal_Board** board);
-bool IsMoveExist(Normal_Board** board);
-void HelpSuggestion(Normal_Board** board, position& pos1, position& pos2);
+bool HelpSuggestion(Normal_Board** board, position& pos1, position& pos2);

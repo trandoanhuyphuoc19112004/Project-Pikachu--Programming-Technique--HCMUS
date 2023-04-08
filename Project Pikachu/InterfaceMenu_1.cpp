@@ -27,13 +27,6 @@ void SetColor(int color)
         SetConsoleTextAttribute(hStdOut, wColor);
     }
 }
-// Ref: https://tuicocach.com/viet-ham-thay-doi-mau-chu-trong-man-hinh-console-c-c/
-void TextColor(int x)
-{
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(h, x);
-}
-
 // Control the Cursor
 // Ref:  https://tuicocach.com/tao-chuyen-dong-co-ban-trong-console-c-c-dieu-khien-chuyen-dong/
 void GoToXY(int x, int y)
@@ -186,9 +179,23 @@ void LoadandDrawAscii(string filename, int line, int x, int y)
     }
     delete[] ptr;
 }
+void BackGround(char bg[][49], string filename)
+{
+    ifstream filein(filename);
+    for (int i = 0; i < 52; i++)
+    {
+    for (int j = 0; j < 49; j++)
+    {
+        bg[i][j] = filein.get();
+    }
+    filein.ignore();
+    }
+    filein.close();
+}
+
 int CreateMenuGame()
 {
-    system("cls");
+        system("cls");
         NoHighlightMenuBar(40, 16);
         NoHighlightMenuBar(40, 18);
         NoHighlightMenuBar(40, 20);

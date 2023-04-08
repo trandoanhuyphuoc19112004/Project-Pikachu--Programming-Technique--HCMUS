@@ -45,6 +45,12 @@
     <ClInclude Include="HardMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Tutorial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckNormal.cpp">
@@ -77,6 +83,15 @@
     <ClCompile Include="HardMap.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tutorial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source1.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Pikachu.txt">
@@ -86,6 +101,21 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="Logo.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="LeaderBoard_Logo.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="LoseBG.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Trophy_1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Winbackground.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="BG.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

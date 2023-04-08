@@ -255,39 +255,8 @@ bool CheckWin(Normal_Board** board)
 	return true;
 }
 
-bool IsMoveExist(Normal_Board** board)
-{
-	char check = 'A';
-	position *posarr = new position[BOARDHEIGTH*BOARDWIDTH]; // Use mark array 
-	int idx = 0;
-	while (check >= 'A' && check <= 'Z')
-	{
-		for (int i = 0; i < BOARDHEIGTH; i++)
-		{
-			for (int j = 0; j < BOARDWIDTH; j++)
-			{
-				if (board[i][j].c == check)
-				{
-					posarr[idx].x = i;
-					posarr[idx].y = j;
-					idx++;
-				}
-			}
-		}
-		check++;
-	}
-	for (int i = 0; i < idx; i++)
-	{
-		if (CheckOverall(board, posarr[i], posarr[i + 1]))
-		{
-			delete[] posarr;
-			return true;
-		}
-	}
-	delete[] posarr;
-	return false;
-}
-void  HelpSuggestion(Normal_Board** board, position &pos1, position &pos2)
+// This function also used to check valid pair exist.
+bool  HelpSuggestion(Normal_Board** board, position &pos1, position &pos2)
 {
 	for (int i = 0; i < BOARDHEIGTH; i++)
 		for (int j = 0; j < BOARDWIDTH; j++)
@@ -301,46 +270,9 @@ void  HelpSuggestion(Normal_Board** board, position &pos1, position &pos2)
 					{
 						pos1 = { i,j };
 						pos2 = { g,h };
-						return; 
+						return true;;
 					}
 				}
 		}
 }
-	/*
-	for (char check = 'A'; check <= 'Z'; check++)
-	{
-		int pair = 0;
-		position* markarr = new position[2];
-		for (int i = 0; i < BOARDHEIGTH; i++)
-		{
-			for (int j = 0; j < BOARDWIDTH; j++)
-			{
-				
-				if (pair <= 1)
-				{
-					if (board[i][j].c == check)
-					{
-						markarr[pair++].x = i;
-						markarr[pair++].y = j;
-						GoToXY(10, 0);
-						cout << i << j << endl;
-					}
-				}
-				else if (canConnect(board, markarr[0].x, markarr[1].x, markarr[0].y, markarr[1].y))
-				{
-					drawBox(board[markarr[0].x][markarr[0].y], 80);
-					Sleep(300);
-					drawBox(board[markarr[1].x][markarr[1].y], 80);
-					Sleep(300);
-					return;
-				}
-				else
-				{
-					delete[] markarr;
-					break;
-				}
-			}
-		}
-	}
-	*/
-
+	

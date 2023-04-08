@@ -2,6 +2,8 @@
 #include"NormalMap.h"
 #include "EndingBackground.h"
 #include "BinIO.h"
+#include "Players.h"
+#include "Clock.h"
 char box[5][10] = { {" ------- "},
 					{"|       |"},
 					{"|       |"},
@@ -12,6 +14,21 @@ char deletebox[5][10] ={ {"         "},
                          {"         "},
                          {"         "},
                          {"         "} };
+char BG[52][49];
+/*
+void DrawDeleteBox(Normal_Board board, char BG[][49])
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
+    int TempX = board.i;
+    int TempY = board.j;
+    for (int i = 0; i < 5; i++)
+      for (int j = 0; j < 10; j++)
+      {
+           GoToXY(TempY + j, TempX + i);
+           cout << BG[TempX * 4 + i][TempY * 9 + j];
+      }
+}
+*/
 // Toa do trong mang 2 chieu nguoc voi toa do trong ham GotoXY
 void drawBox(Normal_Board board, int color)
 {
@@ -56,6 +73,8 @@ void drawBox(Normal_Board board, int color)
            GoToXY(j1 * 13, i1 * 6 + i);
            cout << deletebox[i];
        }
+       // Print the background
+       
     }
     if (board.movesuggest)
     {
@@ -92,6 +111,16 @@ void checkPair(Normal_Board** board, position& pos, position selectedPos[2], int
             Sleep(300);
             board[selectedPos[0].x][selectedPos[0].y].c = ' ';
             board[selectedPos[1].x][selectedPos[1].y].c = ' ';
+            /*
+            if (selectedPos[0].y < 6)
+            {
+                DrawDeleteBox(board[selectedPos[0].x][selectedPos[0].y], BG);
+            }
+            if (selectedPos[1].y < 6)
+            {
+                DrawDeleteBox(board[selectedPos[1].x][selectedPos[1].y], BG);
+            }
+            */
         }
         else
         {
@@ -427,76 +456,109 @@ void DrawNormalMap(Normal_Board** board, int color)
         }
     }
 }
-void NormalMap(players& player, int& FlagCheckExit)
+// 
+bool stop = 0;
+void printClock()
 {
-    int Help = 2;
-    system("cls");
-    Normal_Board** board = new Normal_Board * [BOARDHEIGTH];
-    InitBoard(board);
-    char c;
-    SetColor(11);
-    GoToXY(5, 2);
-    cout << "Player:" << player.name;
-    GoToXY(25, 2);
-    cout << "Life:" << player.life;
-    GoToXY(45, 2);
-    cout << "Points:" << player.point;
-    GoToXY(65, 2);
-    cout << "Help:" << Help;
-    GoToXY(85, 2);
-    cout << "Normal Mode";
-    GoToXY(30, 30);
-    cout << "Press ESC to exit";
-    GoToXY(30, 32);
-    cout << "Press Enter to choose";
-    GoToXY(30, 34);
-    cout << "Use arrow keys to move";
-    GoToXY(30, 36);
-    cout << "Press Tab to get help";
-    position selectedPos[2] = { {-1, -1}, {-1, -1} };
-    position CurPos;
-    CurPos.x = 0;
-    CurPos.y = 0;
-    int pair = 0;
-    int FlagCheckWin = 0;
-    bool FlagMoveExist = true;
-    // Game is processing, update the screen 
-    while (player.life >= 0 && FlagCheckExit >= 0 && FlagCheckWin == 0 && FlagMoveExist)
+    Hour h = { 2,0 };
+    char a[5] = { '0','0',':','0','0' };
+    while (!stop)
     {
-        FlagMoveExist = IsMoveExist(board); // Check is move exist 
-        if (!FlagMoveExist)
-        {
-            WinBackGround(player);
-            SaveFile("Leaderboard.bin", player);
-            return; // Out function when no pair valid exist 
-        }
-        FlagCheckWin = CheckWin(board);
-        // Check Win
-        if (CheckWin(board))
-        {
-            WinBackGround(player);
-            SaveFile("Leaderboard.bin", player);
-            return; // Out function when you win 
-        }
-        board[CurPos.x][CurPos.y].Is_Selected = 1;
-        DrawNormalMap(board, 112);
-        moveCursor(board, CurPos, selectedPos, pair, player, FlagCheckExit, Help);
-        checkPair(board, CurPos, selectedPos, pair, player);
-  
+        if (!changetime(&h)) stop = 0;
+        insertarray(a, &h);
+        WriteBlockChar(a, 1, 5, 85, 1, 0x004 | 0x060);
+        Sleep(970);
     }
-    // Check lose 
-    if (player.life < 0)
-    {
-        for (int i = 0; i < BOARDHEIGTH; i++)
-        {
-            for (int j = 0; j < BOARDWIDTH; j++)
-            {
-                board[i][j].c = ' ';
-            }
-        }
-        LoseBackGround(player);
-        SaveFile("Leaderboard.bin", player);
-    }
-    DeleteBoard(board);
     return;
+}
+void close(DWORD evt)
+{
+    if (evt == CTRL_CLOSE_EVENT) stop = 0;
+}
+void NormalMap(players& player)
+{
+        int Help = 2;
+        BackGround(BG, "BG.txt");
+        system("cls");
+        Normal_Board** board = new Normal_Board * [BOARDHEIGTH];
+        InitBoard(board);
+        char c;
+        SetColor(11);
+        GoToXY(5, 2);
+        cout << "Player:" << player.name;
+        GoToXY(25, 2);
+        cout << "Life:" << player.life;
+        GoToXY(45, 2);
+        cout << "Points:" << player.point;
+        GoToXY(65, 2);
+        cout << "Help:" << Help;
+        GoToXY(85, 2);
+        cout << "Normal Mode";
+        GoToXY(30, 30);
+        cout << "Press ESC to exit";
+        GoToXY(30, 32);
+        cout << "Press Enter to choose";
+        GoToXY(30, 34);
+        cout << "Use arrow keys to move";
+        GoToXY(30, 36);
+        cout << "Press Tab to get help";
+        int FlagCheckExit = 0;
+        position selectedPos[2] = { {-1, -1}, {-1, -1} };
+        position CurPos;
+        CurPos.x = 0;
+        CurPos.y = 0;
+        int pair = 0;
+        int FlagCheckWin = 0;
+        bool FlagMoveExist = true;
+        // Starting countdown
+        SetConsoleCtrlHandler((PHANDLER_ROUTINE)close, TRUE);
+        thread clock;
+        clock = thread(printClock);
+        // Thread run independently from function, so when thread run completed then out function 
+        // Game is processing, update the screen 
+        while (player.life >= 0 && FlagCheckExit >= 0 && FlagCheckWin == 0 && FlagMoveExist && stop == 0)
+        {
+            position pos1 = { -1,-1 };
+            position pos2 = { -1, -1 };
+            FlagMoveExist = HelpSuggestion(board, pos1, pos2); // Check is move exist 
+            if (!FlagMoveExist)
+            {
+                stop = 1;
+                WinBackGround(player);
+                SaveFile("Leaderboard.bin", player);
+                return; // Out function when no pair valid exist 
+            }
+            FlagCheckWin = CheckWin(board);
+            // Check Win
+            if (CheckWin(board))
+            {
+                stop = 1;
+                clock.join();
+                WinBackGround(player);
+                SaveFile("Leaderboard.bin", player);
+                return; // Out function when you win 
+            }
+            board[CurPos.x][CurPos.y].Is_Selected = 1;
+            DrawNormalMap(board, 112);
+            moveCursor(board, CurPos, selectedPos, pair, player, FlagCheckExit, Help);
+            checkPair(board, CurPos, selectedPos, pair, player);
+
+        }
+        // Check lose 
+        if (player.life < 0)
+        {
+            for (int i = 0; i < BOARDHEIGTH; i++)
+            {
+                for (int j = 0; j < BOARDWIDTH; j++)
+                {
+                    board[i][j].c = ' ';
+                }
+            }
+            stop = 1; 
+            clock.join();
+            LoseBackGround(player);
+            SaveFile("Leaderboard.bin", player);
+        }
+        DeleteBoard(board);
+        return;
 }

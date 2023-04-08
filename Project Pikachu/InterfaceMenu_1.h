@@ -21,7 +21,6 @@ void HideCursor(bool visible);
 void DisableCtrButton(bool Close, bool Min, bool Max);
 void CreateWindows();
 // Create menu bar 
-void TextColor(int x);
 void SetColor(int color);
 void GoToXY(int x, int y);
 void NoHighlightMenuBar(int x, int y);
@@ -29,5 +28,7 @@ void HighLightMenuBar(int x, int y);
 int CreateMenuGame();
 // Load Image to Menu 
 void LoadandDrawAscii(string filename, int line, int x, int y);
+// Load BackGround
+void BackGround(char bg[][49], string filename);
 
 
