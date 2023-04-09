@@ -131,8 +131,8 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		yMin = y1; yMax = y2; xTmp1 = x1; xTmp2 = x2;
 	}
 	else {
-		yMin = x2;
-		yMax = x1;
+		yMin = y2;
+		yMax = y1;
 		xTmp1 = x2;
 		xTmp2 = x1;
 	}

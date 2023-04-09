@@ -17,6 +17,7 @@ Hard_Board* findNode(Hard_Board** board, int x, int y) {
 	if (x < 0 || x>4 || y < 0 || y>5)
 		return NULL;
 	Hard_Board* tmp = board[x];
+	if (tmp == NULL) return NULL;
 	while (tmp) {
 		if (tmp->j == y)
 			return tmp;
@@ -64,6 +65,7 @@ void initBoardZ(Hard_Board** board) {
 }
 
 bool rowCheckZ(Hard_Board** board, int yMin, int yMax, int x) {
+	if (yMax = yMin + 1) return true;
 	Hard_Board* tmp = findNode(board, x, yMin + 1);
 	int i = yMin + 1, j = yMax;
 	if (tmp != NULL) return false;
@@ -74,7 +76,7 @@ bool rowCheckZ(Hard_Board** board, int yMin, int yMax, int x) {
 		tmp = findNode(board, x, i);
 	}
 }
-
+   
 bool colCheckZ(Hard_Board** board, int xMin, int xMax, int y) {
 	if (xMax = xMin + 1) return true;
 	Hard_Board* tmp = findNode(board, xMin + 1, y);
@@ -283,7 +285,7 @@ void deleteNode(Hard_Board** board, int x, int y) {
 	Hard_Board* tmp = findNode(board, x, y);
 	if (y == 0) {
 		if (board[x]->next == NULL) {
-			removeBox(x, y);
+			removeBox(tmp->i,tmp->j);
 			board[x] == NULL;
 			return;
 		}
@@ -316,8 +318,8 @@ void deleteNode(Hard_Board** board, int x, int y) {
 		tmp->next = NULL;
 	}
 	else {
-		removeBox(tmp->next->i, tmp->next->j);
-		delete tmp->next;
+		removeBox(tmp->i, tmp->j);
+		delete tmp;
 		tmp = findNode(board, x, y - 1);
 		tmp->next = NULL;
 	}

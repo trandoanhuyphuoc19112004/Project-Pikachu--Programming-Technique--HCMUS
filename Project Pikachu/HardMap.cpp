@@ -9,7 +9,7 @@ char boxZ[5][10] = { {" ------- "},
                     {"|       |"},
                     {" ------- "} };
 
-char deleteboxZ[5][10] = { {"         "},
+char deleteboxZ[5][10] = {{"         "},
                           {"         "},
                           {"         "},
                           {"         "},
@@ -48,7 +48,7 @@ void HardMap(players& player)
             return;
         }
 
-        board[curPosition.x][curPosition.y].Is_Selected = 1;
+        findNode(board,curPosition.x,curPosition.y)->Is_Selected = 1;
         DrawHardMap(board);
         moveCursorZ(board, curPosition, selectedPos, pair, player);
         checkPairZ(board, curPosition, selectedPos, pair, player);
@@ -112,6 +112,7 @@ void drawBoxZ(Hard_Board board)
 }
 
 void removeBox(int x, int y) {
+    x++; y++;
     for (int i = 0; i < 6; i++)
     {
         GoToXY(y * 13, x * 6 + i);
@@ -266,7 +267,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
             {
                 for (int j = pos.y - 1; j >= 0; j--)
                 {
-                    if (findNode(board, i, i) != NULL)
+                    if (findNode(board, i, j) != NULL)
                     {
                         // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
                         PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -281,7 +282,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
             {
                 for (int j = pos.y - 1; j >= 0; j--)
                 {
-                    if (findNode(board, i, i) != NULL)
+                    if (findNode(board, i, j) != NULL)
                     {
                         // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
                         PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -296,7 +297,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
             {
                 for (int j = BOARDWIDTH - 1; j > pos.y; j--)
                 {
-                    if (findNode(board, i, i) != NULL)
+                    if (findNode(board, i, j) != NULL)
                     {
                         // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
                         PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -311,7 +312,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
             {
                 for (int j = BOARDWIDTH - 1; j > pos.y; j--)
                 {
-                    if (findNode(board, i, i) != NULL)
+                    if (findNode(board, i, j) != NULL)
                     {
                         // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
                         PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -327,7 +328,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
             {
                 for (int j = pos.y + 1; j < BOARDWIDTH; j++)
                 {
-                    if (findNode(board, i, i) != NULL)
+                    if (findNode(board, i, j) != NULL)
                     {
                         // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
                         PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -342,7 +343,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
             {
                 for (int j = pos.y + 1; j < BOARDWIDTH; j++)
                 {
-                    if (findNode(board, i, i) != NULL)
+                    if (findNode(board, i, j) != NULL)
                     {
                         // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
                         PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -357,7 +358,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
             {
                 for (int j = 0; j < pos.y; j++)
                 {
-                    if (findNode(board, i, i) != NULL)
+                    if (findNode(board, i, j) != NULL)
                     {
                         // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
                         PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -372,7 +373,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
             {
                 for (int j = 0; j < pos.y; j++)
                 {
-                    if (findNode(board, i, i) != NULL)
+                    if (findNode(board, i, j) != NULL)
                     {
                         // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
                         PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -398,8 +399,20 @@ void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int&
             GoToXY(55, 2);
             SetColor(11);
             cout << "Points:" << user.point;
-            deleteNode(board, selectedPos[0].x, selectedPos[0].y);
-            deleteNode(board, selectedPos[1].x, selectedPos[1].y);
+            Hard_Board* tmp1 = findNode(board, selectedPos[0].x, selectedPos[0].y);
+            Hard_Board* tmp2 = findNode(board, selectedPos[1].x, selectedPos[1].y);
+            tmp1->Is_Chosen = 0;
+            tmp2->Is_Chosen = 0;
+            tmp1->Is_Selected = 0;
+            tmp2->Is_Selected = 0;
+            if (selectedPos[0].y > selectedPos[1].y) {
+                deleteNode(board, selectedPos[0].x, selectedPos[0].y);
+                deleteNode(board, selectedPos[1].x, selectedPos[1].y);
+            }
+            else {
+                deleteNode(board, selectedPos[1].x, selectedPos[1].y);
+                deleteNode(board, selectedPos[0].x, selectedPos[0].y);
+            }
         }
         else
         {
@@ -407,13 +420,13 @@ void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int&
             SetColor(11);
             GoToXY(35, 2);
             cout << "Life:" << user.life;
+            Hard_Board* tmp1 = findNode(board, selectedPos[0].x, selectedPos[0].y);
+            Hard_Board* tmp2 = findNode(board, selectedPos[1].x, selectedPos[1].y);
+            tmp1->Is_Chosen = 0;
+            tmp2->Is_Chosen = 0;
+            tmp1->Is_Selected = 0;
+            tmp2->Is_Selected = 0;
         }
-        Hard_Board* tmp1 = findNode(board, selectedPos[0].x, selectedPos[0].y);
-        Hard_Board* tmp2 = findNode(board, selectedPos[1].x, selectedPos[1].y);
-        tmp1->Is_Chosen = 0;
-        tmp2->Is_Chosen = 0;
-        tmp1->Is_Selected = 0;
-        tmp2->Is_Selected = 0;
         selectedPos[0] = { -1, -1 };
         selectedPos[1] = { -1, -1 };
         pair = 0;
@@ -421,7 +434,7 @@ void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int&
         {
             for (int j = pos.y; j < BOARDWIDTH; j++)
             {
-                if (board[i][j].c != ' ')
+                if (findNode(board,i,j) != NULL)
                 {
                     pos.y = j;
                     pos.x = i;
@@ -433,7 +446,7 @@ void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int&
         {
             for (int j = 0; j <= pos.y; j++)
             {
-                if (board[i][j].c != ' ')
+                if (findNode(board, i, j) != NULL)
                 {
                     pos.y = j;
                     pos.x = i;
