@@ -308,6 +308,7 @@ void deleteNode(Hard_Board** board, int x, int y)
 		{
 			removeBox(tmp->i,tmp->j);
 			board[x] == NULL;
+			board[x]->Is_Clear = 1;
 			return;
 		}
 		board[x]->c = tmp->next->c;

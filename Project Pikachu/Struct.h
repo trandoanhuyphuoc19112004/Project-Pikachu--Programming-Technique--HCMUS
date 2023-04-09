@@ -30,5 +30,6 @@ struct Hard_Board
 	bool Is_Selected = 0, Is_Chosen = 0;
 	char c = ' ';
 	Hard_Board* next;
+	bool Is_Clear = 0;
 };
 

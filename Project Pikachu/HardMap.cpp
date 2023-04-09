@@ -407,6 +407,8 @@ void DrawHardMap(Hard_Board** board)
 {
     for (int i = 0; i < BOARDHEIGTH; i++)
     {
+        if (board[i]->Is_Clear == 1)
+            continue;
         Hard_Board* temp = board[i];
         while (temp != NULL)
         {
