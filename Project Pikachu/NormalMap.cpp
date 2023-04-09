@@ -15,6 +15,7 @@ char deletebox[5][10] ={ {"         "},
                          {"         "},
                          {"         "} };
 char BG[52][49];
+bool stop = 0;
 /*
 void DrawDeleteBox(Normal_Board board, char BG[][49])
 {
@@ -150,6 +151,7 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
     if (funckey == ESC)
     {
         FlagCheckExit = -1; // Mark flag exit game 
+        stop = 1;
         return; 
     }
     if (funckey == TAB && help > 0) // Use help 2 times
@@ -177,9 +179,6 @@ void moveCursor(Normal_Board** board, position& pos, position selectedPos[], int
             pos2 = { -1, -1 };
 
         }
-        
-            
-      
         return;
     }
     if (funckey == Enter   && !board[pos.x][pos.y].Is_Chosen) // The point is entered but no ever chosen
@@ -457,14 +456,14 @@ void DrawNormalMap(Normal_Board** board, int color)
     }
 }
 // 
-bool stop = 0;
+
 void printClock()
 {
-    Hour h = { 2,0 };
+    Hour h = { 0,5 }; // Set time countdown 
     char a[5] = { '0','0',':','0','0' };
     while (!stop)
     {
-        if (!changetime(&h)) stop = 0;
+        if (!changetime(&h)) stop = 1;
         insertarray(a, &h);
         WriteBlockChar(a, 1, 5, 85, 1, 0x004 | 0x060);
         Sleep(970);
@@ -473,7 +472,7 @@ void printClock()
 }
 void close(DWORD evt)
 {
-    if (evt == CTRL_CLOSE_EVENT) stop = 0;
+    if (evt == CTRL_CLOSE_EVENT) stop = 1;
 }
 void NormalMap(players& player)
 {
@@ -523,19 +522,23 @@ void NormalMap(players& player)
             FlagMoveExist = HelpSuggestion(board, pos1, pos2); // Check is move exist 
             if (!FlagMoveExist)
             {
+                DeleteBoard(board);
                 stop = 1;
                 WinBackGround(player);
                 SaveFile("Leaderboard.bin", player);
+                stop = 0;
                 return; // Out function when no pair valid exist 
             }
             FlagCheckWin = CheckWin(board);
             // Check Win
             if (CheckWin(board))
             {
+                DeleteBoard(board);
                 stop = 1;
                 clock.join();
                 WinBackGround(player);
                 SaveFile("Leaderboard.bin", player);
+                stop = 0;
                 return; // Out function when you win 
             }
             board[CurPos.x][CurPos.y].Is_Selected = 1;
@@ -547,18 +550,27 @@ void NormalMap(players& player)
         // Check lose 
         if (player.life < 0)
         {
-            for (int i = 0; i < BOARDHEIGTH; i++)
-            {
-                for (int j = 0; j < BOARDWIDTH; j++)
-                {
-                    board[i][j].c = ' ';
-                }
-            }
             stop = 1; 
             clock.join();
+            DeleteBoard(board);
             LoseBackGround(player);
             SaveFile("Leaderboard.bin", player);
+            stop = 0;
+            return;
         }
+        if (FlagCheckExit == -1) // If user choose esc
+        {
+            DeleteBoard(board);
+            clock.join();
+            stop = 0;
+            return;
+        }
+        // When player cannot solve all puzzle in game time
+        clock.join();
         DeleteBoard(board);
+        EndTimeBackGround(player);
+        system("Pause");
+        SaveFile("Leaderboard.bin", player);
+        stop = 0;
         return;
 }

@@ -9,6 +9,7 @@
 #include "HardMap.h"
 #include "Tutorial.h"
 #include "Clock.h"
+#include "CustomMode.h"
 int main()
 {
 	players user;
@@ -47,11 +48,19 @@ int main()
 		}
 		case 3:
 		{
-			
-			//Tutorial();
-			break;
+			system("cls");
+			PlayerInfo(user);
+			system("cls");
+			ChooseMode();
+			break; 
 		}
 		case 4:
+		{
+			system("cls");
+			Tutorial();
+			break;
+		}
+		case 5:
 		{
 			
 			system("cls");
@@ -59,7 +68,7 @@ int main()
 			break;
 			
 		}
-		case 5:
+		case 6:
 		{
 			system("cls");
 			CreditInfo();

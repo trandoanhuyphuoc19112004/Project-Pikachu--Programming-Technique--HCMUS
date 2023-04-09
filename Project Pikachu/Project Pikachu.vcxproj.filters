@@ -51,6 +51,9 @@
     <ClInclude Include="Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CustomMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckNormal.cpp">
@@ -83,13 +86,13 @@
     <ClCompile Include="HardMap.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tutorial.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source1.cpp">
+    <ClCompile Include="Clock.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="Clock.cpp">
+    <ClCompile Include="Tutorial.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomMode.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

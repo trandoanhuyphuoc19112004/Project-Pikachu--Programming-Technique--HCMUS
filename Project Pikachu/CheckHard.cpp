@@ -13,7 +13,8 @@ void push(Hard_Board*& head, Hard_Board* data) {
 	}
 }
 
-Hard_Board* findNode(Hard_Board** board, int x, int y) {
+Hard_Board* findNode(Hard_Board** board, int x, int y) 
+{
 	if (x < 0 || x>4 || y < 0 || y>5)
 		return NULL;
 	Hard_Board* tmp = board[x];
@@ -26,10 +27,13 @@ Hard_Board* findNode(Hard_Board** board, int x, int y) {
 	return NULL;
 }
 
-void initBoardZ(Hard_Board** board) {
-	for (int i = 0; i < BOARDHEIGTH; i++) {
+void initBoardZ(Hard_Board** board) 
+{
+	for (int i = 0; i < BOARDHEIGTH; i++) 
+	{
 		board[i] = NULL;
-		for (int j = 0; j < BOARDWIDTH; j++) {
+		for (int j = 0; j < BOARDWIDTH; j++) 
+		{
 			Hard_Board* tmp = new Hard_Board;
 			tmp->i = i;
 			tmp->j = j;
@@ -63,7 +67,20 @@ void initBoardZ(Hard_Board** board) {
 		num--;
 	}
 }
-
+void deleteBoardZ(Hard_Board** board)
+{
+	for (int i = 0; i < BOARDHEIGTH; i++) 
+	{
+		Hard_Board * temp;
+		while (board[i] != nullptr)
+		{
+			temp = board[i];
+			board[i] = board[i]->next;
+			delete temp;
+		}
+	}
+	delete[] board;
+}
 bool rowCheckZ(Hard_Board** board, int yMin, int yMax, int x) {
 	if (yMax = yMin + 1) return true;
 	Hard_Board* tmp = findNode(board, x, yMin + 1);
@@ -333,4 +350,5 @@ bool checkOverallZ(Hard_Board** board, position p1, position p2) {
 	}
 	return false;
 }
+
 

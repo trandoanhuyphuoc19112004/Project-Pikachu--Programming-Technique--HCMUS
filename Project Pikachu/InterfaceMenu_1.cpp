@@ -100,20 +100,26 @@ void HighLightMenuBar(int x, int y)
     else if (y == 20)
     {
         GoToXY(x, y);
-        cout << "       HOW TO PLAY      ";
+        cout << "       CUSTOM MODE       ";
     }
 
     else if (y == 22)
     {
         GoToXY(x, y);
+        cout << "       HOW TO PLAY      ";
+    }
+
+    else if (y == 24)
+    {
+        GoToXY(x, y);
         cout << "       LEADERBOARD     ";
     }
-    else if (y == 24)
+    else if (y == 26)
     {
         GoToXY(x, y);
         cout << "       CREDITS      ";
     }
-    else if (y == 26)
+    else if (y == 28)
     {
         GoToXY(x, y);
         cout << "       EXIT GAME     ";
@@ -138,20 +144,26 @@ void NoHighlightMenuBar(int x, int y)
     else if (y == 20)
     {
         GoToXY(x, y);
-        cout << "       HOW TO PLAY      ";
+        cout << "       CUSTOM MODE       ";
     }
 
     else if (y == 22)
     {
         GoToXY(x, y);
+        cout << "       HOW TO PLAY      ";
+    }
+
+    else if (y == 24)
+    {
+        GoToXY(x, y);
         cout << "       LEADERBOARD     ";
     }
-    else if (y == 24)
+    else if (y == 26)
     {
         GoToXY(x, y);
         cout << "       CREDITS      ";
     }
-    else if (y == 26)
+    else if (y == 28)
     {
         GoToXY(x, y);
         cout << "       EXIT GAME     ";
@@ -202,6 +214,7 @@ int CreateMenuGame()
         NoHighlightMenuBar(40, 22);
         NoHighlightMenuBar(40, 24);
         NoHighlightMenuBar(40, 26);
+        NoHighlightMenuBar(40, 28);
         SetColor(14);
         LoadandDrawAscii("Logo.txt", 15, 30, 3);
         LoadandDrawAscii("Onix.txt", 15, 1, 11);
@@ -237,18 +250,15 @@ int CreateMenuGame()
                     {
                         Key_y -= 2;
                     }
-                    else if (key == DOWN && Key_y != 26)
+                    else if (key == DOWN && Key_y != 28)
                     {
-                        // Ref sound: https://www.pond5.com/sound-effects/item/57740945-old-school-video-game-efx
-                       // PlaySound(TEXT("Choiceoption.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         Key_y += 2;
                     }
                 }
-                    else if (key == 13)
+                   else if (key == 13)
                     {
-
                         if (Key_y == 16)
-                        return 1;
+                            return 1;
                         if (Key_y == 18)
                             return 2;
                         if (Key_y == 20)
@@ -258,6 +268,8 @@ int CreateMenuGame()
                         if (Key_y == 24)
                             return 5;  
                         if (Key_y == 26)
+                            return 6;
+                        if (Key_y == 28)
                             return 0;
                     }
             }

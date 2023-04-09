@@ -1,7 +1,8 @@
 #include "EndingBackground.h"
-int LoseBackGround(players& player)
+int LoseBackGround(players player)
 {
 	system("cls");
+	char c;
 	// Ref: https://pixabay.com/sound-effects/dead-8bit-41400/
 	PlaySound(TEXT("Losemusic.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	SetColor(11);
@@ -14,11 +15,10 @@ int LoseBackGround(players& player)
 	cout << "Point:" << player.point;
 	GoToXY(40, 22);
 	cout << "Press any key to continue";
-	char c;
 	c = _getch();
 	return 0;
 }
-int WinBackGround(players& player)
+int WinBackGround(players player)
 {
 	system("cls");
 	// Ref: https://pixabay.com/sound-effects/win-sfx-38507/
@@ -36,4 +36,20 @@ int WinBackGround(players& player)
 	char c;
 	c = _getch();
 	return 1;
+}
+int EndTimeBackGround(players player)
+{
+	system("cls");
+	// Ref: https://pixabay.com/sound-effects/dead-8bit-41400/
+	PlaySound(TEXT("Losemusic.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	SetColor(11);
+	LoadandDrawAscii("LoseBG.txt", 15, 20, 3);
+	GoToXY(40, 16);
+	cout << "TIME IS MONEY!";
+	GoToXY(40, 18);
+	cout << "Name:" << player.name;
+	GoToXY(40, 20);
+	cout << "Point:" << player.point;
+	GoToXY(40, 22);
+	return 0;
 }

@@ -18,3 +18,4 @@ bool uCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2);
 bool canConnectZ(Hard_Board** board, int x1, int x2, int y1, int y2);
 void deleteNode(Hard_Board** board, int x, int y);
 bool checkOverallZ(Hard_Board** board, position p1, position p2);
+void deleteBoardZ(Hard_Board** board);
