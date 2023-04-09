@@ -19,7 +19,8 @@ Hard_Board* findNode(Hard_Board** board, int x, int y)
 		return NULL;
 	Hard_Board* tmp = board[x];
 	if (tmp == NULL) return NULL;
-	while (tmp) {
+	while (tmp) 
+	{
 		if (tmp->j == y)
 			return tmp;
 		tmp = tmp->next;
@@ -298,10 +299,13 @@ bool canConnectZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	if (uCheckZ(board, x1, x2, y1, y2)) return true;
 }
 
-void deleteNode(Hard_Board** board, int x, int y) {
+void deleteNode(Hard_Board** board, int x, int y) 
+{
 	Hard_Board* tmp = findNode(board, x, y);
-	if (y == 0) {
-		if (board[x]->next == NULL) {
+	if (y == 0) 
+	{
+		if (board[x]->next == NULL) 
+		{
 			removeBox(tmp->i,tmp->j);
 			board[x] == NULL;
 			return;
@@ -313,8 +317,10 @@ void deleteNode(Hard_Board** board, int x, int y) {
 			delete tmp;
 			board[x]->next = NULL;
 		}
-		else {
-			while (tmp->next->next != NULL) {
+		else 
+		{
+			while (tmp->next->next != NULL) 
+			{
 				tmp->c = tmp->next->c;
 				tmp = tmp->next;
 			}
@@ -324,8 +330,10 @@ void deleteNode(Hard_Board** board, int x, int y) {
 			tmp->next = NULL;
 		}
 	}
-	else if (tmp->next != NULL) {
-		while (tmp->next->next != NULL) {
+	else if (tmp->next != NULL) 
+	{
+		while (tmp->next->next != NULL) 
+		{
 			tmp->c = tmp->next->c;
 			tmp = tmp->next;
 		}
@@ -334,7 +342,8 @@ void deleteNode(Hard_Board** board, int x, int y) {
 		delete tmp->next;
 		tmp->next = NULL;
 	}
-	else {
+	else 
+	{
 		removeBox(tmp->i, tmp->j);
 		delete tmp;
 		tmp = findNode(board, x, y - 1);
@@ -351,4 +360,12 @@ bool checkOverallZ(Hard_Board** board, position p1, position p2) {
 	return false;
 }
 
-
+bool checkWin(Hard_Board** board)
+{
+	for (int i = 0; i < BOARDHEIGTH; i++)
+	{
+		if (board[i] != NULL)
+			return false;
+	}
+	return true;
+}

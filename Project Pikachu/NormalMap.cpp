@@ -541,6 +541,7 @@ void NormalMap(players& player)
                 stop = 0;
                 return; // Out function when you win 
             }
+            // Cursor points to the box, the box will be lighted
             board[CurPos.x][CurPos.y].Is_Selected = 1;
             DrawNormalMap(board, 112);
             moveCursor(board, CurPos, selectedPos, pair, player, FlagCheckExit, Help);

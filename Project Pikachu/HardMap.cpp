@@ -58,7 +58,7 @@ void drawBoxZ(Hard_Board board)
     }
 }
 
-void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int& pair, players& user) 
+void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int& pair, players& user)
 {
     if (pair == 2) {
         if (checkOverallZ(board, selectedPos[0], selectedPos[1]))
@@ -75,11 +75,13 @@ void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int&
             tmp2->Is_Chosen = 0;
             tmp1->Is_Selected = 0;
             tmp2->Is_Selected = 0;
-            if (selectedPos[0].y > selectedPos[1].y) {
+            if (selectedPos[0].y > selectedPos[1].y)
+            {
                 deleteNode(board, selectedPos[0].x, selectedPos[0].y);
                 deleteNode(board, selectedPos[1].x, selectedPos[1].y);
             }
-            else {
+            else
+            {
                 deleteNode(board, selectedPos[1].x, selectedPos[1].y);
                 deleteNode(board, selectedPos[0].x, selectedPos[0].y);
             }
@@ -125,6 +127,7 @@ void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int&
             }
         }
     }
+
     else return;
 }
 void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int& pair, players& user, int& FlagCheckExit)
@@ -146,7 +149,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
         return;
     }
     else {
-        if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) // ktra xem o nay co dang duoc chon hay khong
+        if ((pos.y != selectedPos[0].y || pos.x != selectedPos[0].x) && (pos.y != selectedPos[1].y || pos.x != selectedPos[1].x)) 
             tmp->Is_Selected = 0;
         // Tranversing the board by entering the key and save the pos
         switch (funckey)
@@ -400,7 +403,6 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
         }
     }
 }
-
 void DrawHardMap(Hard_Board** board)
 {
     for (int i = 0; i < BOARDHEIGTH; i++)
@@ -413,8 +415,6 @@ void DrawHardMap(Hard_Board** board)
         }
     }
 }
-
-
 void removeBox(int x, int y) 
 {
     x++; y++;
@@ -456,6 +456,14 @@ void HardMap(players& player)
 
     while (player.life >= 0 && FlagCheckExit >= 0 && FlagCheckWin == 0 && FlagMoveExist )
     {
+        FlagCheckWin = checkWin(board);
+        if (checkWin(board))
+        {
+            deleteBoardZ(board);
+            WinBackGround(player);
+            SaveFile("Leaderboard.bin", player);
+            return; // Out function when you win 
+        }
         findNode(board,curPosition.x,curPosition.y)->Is_Selected = 1;
         DrawHardMap(board);
         moveCursorZ(board, curPosition, selectedPos, pair, player, FlagCheckExit);
@@ -468,7 +476,7 @@ void HardMap(players& player)
         SaveFile("Leaderboard.bin", player);
         return;
     }
-    deleteBoardZ(board);
+   // deleteBoardZ(board);
     return;
 }
 
