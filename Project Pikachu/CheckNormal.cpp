@@ -76,8 +76,6 @@ bool LCheck(Normal_Board** board, int xMin, int xMax, int  yMin, int yMax)
 }
 bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 {
-	if (x1 == x2 && y1 == y2)
-		return false;
 	int xMin, xMax, yMin, yMax;
 	int xTmp1, xTmp2, yTmp1, yTmp2;
 	if (x1 < x2) {
@@ -85,9 +83,6 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		xMax = x2;
 		yTmp1 = y1;					//yTmp1 se lay toa do Y cua xMin
 		yTmp2 = y2;					//yTmp2 se lay toa do Y cua xMax
-	}
-	else if (x1 == x2) {
-		xMin = x1; xMax = x2; yTmp1 = y1; yTmp2 = y2;
 	}
 	else {
 		xMin = x2;
@@ -110,7 +105,7 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		}
 	}
 	// Check U di len
-	if (colCheck(board, xMin - 1, xMax, yTmp2)) {
+	if (colCheck(board, xMin - 1, xMax, yTmp2) || xMin ==  xMax) {
 		for (int i = xMin - 1; i >= 0; i--) {
 			if (board[i][yTmp1].c != ' ' || board[i][yTmp2].c != ' ') break;
 			if (yTmp1 < yTmp2) {
@@ -127,9 +122,6 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		xTmp1 = x1;					//xTmp1 se lay toa do X cua yMin
 		xTmp2 = x2;					//xTmp2 se lay toa do X cua yMax
 	}
-	else if (y1 == y2) {
-		yMin = y1; yMax = y2; xTmp1 = x1; xTmp2 = x2;
-	}
 	else {
 		yMin = y2;
 		yMax = y1;
@@ -143,7 +135,7 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		if (rowCheck(board, yMin, BOARDWIDTH, xTmp1)) return true;
 	}
 	// Check U huong sang phai
-	if (rowCheck(board, yMin, yMin + 1, xTmp1)) {
+	if (rowCheck(board, yMin, yMin + 1, xTmp1) || yMin == yMax) {
 		for (int i = yMax + 1; i < BOARDWIDTH; i++) {
 			if (board[xTmp1][i].c != ' ' || board[xTmp2][i].c != ' ') break;
 			if (xTmp1 < xTmp2) {
@@ -155,7 +147,7 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		}
 	}
 	// Check U huong sang trai
-	if (rowCheck(board, yMin - 1, yMax, xTmp2)) {
+	if (rowCheck(board, yMin - 1, yMax, xTmp2) || yMin == yMax) {
 		for (int i = yMin - 1; i >= 0; i--) {
 			if (board[xTmp1][i].c != ' ' || board[xTmp2][i].c != ' ') break;
 			if (xTmp1 < xTmp2) {
@@ -230,7 +222,7 @@ bool canConnect(Normal_Board** board, int x1, int x2, int y1, int y2)
 	}
 	if (LCheck(board, xMin, xMax, yMin, yMax)) return true;
 	if (Zcheck(board, xMin, xMax, yMin, yMax)) return true;
-	if (Ucheck(board, x1, x2, y1, y2)) return true;
+	//if (Ucheck(board, x1, x2, y1, y2)) return true;
 	return false;
 }
 
@@ -271,10 +263,9 @@ bool  HelpSuggestion(Normal_Board** board, position &pos1, position &pos2)
 					{
 						pos1 = { i,j };
 						pos2 = { g,h };
-						return true;;
+						return true;
 					}
 				}
 		}
-	//return false;
 }
 	

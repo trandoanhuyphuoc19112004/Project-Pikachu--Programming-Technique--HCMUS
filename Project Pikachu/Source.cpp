@@ -41,7 +41,7 @@ int main()
 			system("cls");
 			PlayerInfo(user);
 			system("cls");
-			HardMap(user);
+			HardMapY(user);
 			// Esc do nothing
 			break;
 

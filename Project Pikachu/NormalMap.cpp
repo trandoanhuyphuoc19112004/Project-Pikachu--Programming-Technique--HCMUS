@@ -10,8 +10,6 @@ char box[5][10] = { {" ------- "},
 					{"|       |"},
 					{"|       |"},
 					{" ------- "} };
-int line = 30;
-string * ptr = new string[line]; // Allocate for background
 bool stop = 0; // Clock
 bool clear = 0; // BG
 // Toa do trong mang 2 chieu nguoc voi toa do trong ham GotoXY
@@ -436,6 +434,8 @@ void close(DWORD evt)
 }
 void NormalMap(players& player)
 {
+        int line = 30;
+        string* ptr = new string[line]; // Allocate for background
         int Help = 2;
         BackGround(ptr,line,"BG.txt");
         ClearScreen();
@@ -505,6 +505,7 @@ void NormalMap(players& player)
                 SaveFile("Leaderboard.bin", player);
                 stop = 0;
                 delete[] ptr;
+                ptr = nullptr;
                 return; // Out function when no pair valid exist 
             }
             FlagCheckWin = CheckWin(board);
@@ -518,6 +519,7 @@ void NormalMap(players& player)
                 SaveFile("Leaderboard.bin", player);
                 stop = 0;
                 delete[] ptr;
+                ptr = nullptr;
                 return; // Out function when you win 
             }
             // Cursor points to the box, the box will be lighted
@@ -531,12 +533,13 @@ void NormalMap(players& player)
         if (player.life < 0)
         {
             stop = 1; 
-            //clock.join();
+            clock.join();
             DeleteBoard(board);
             LoseBackGround(player);
             SaveFile("Leaderboard.bin", player);
             stop = 0;
             delete[] ptr;
+            ptr = nullptr;
             return;
         }
         if (FlagCheckExit == -1) // If user choose esc
@@ -545,6 +548,7 @@ void NormalMap(players& player)
             clock.join();
             stop = 0;
             delete[] ptr;
+            ptr = nullptr;
             return;
         }
         // When player cannot solve all puzzle in game time
@@ -555,5 +559,6 @@ void NormalMap(players& player)
         SaveFile("Leaderboard.bin", player);
         stop = 0;
         delete[] ptr;
+        ptr = nullptr;
         return;
 }

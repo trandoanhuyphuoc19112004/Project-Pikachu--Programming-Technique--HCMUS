@@ -54,6 +54,9 @@
     <ClInclude Include="CustomMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CustomMode_Normal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckNormal.cpp">
@@ -83,7 +86,7 @@
     <ClCompile Include="CheckHard.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="HardMap.cpp">
+    <ClCompile Include="HardMapZ.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Clock.cpp">
@@ -93,6 +96,12 @@
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="CustomMode.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomMode_Normal.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HardMapY.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

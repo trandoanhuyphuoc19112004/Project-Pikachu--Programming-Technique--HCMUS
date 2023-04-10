@@ -48,14 +48,6 @@ void drawBoxZ(Hard_Board board)
             cout << board.c;
         }
     }
-    else
-    {
-        for (int i = 0; i < 6; i++)
-        {
-            GoToXY(j1 * 13, i1 * 6 + i);
-            cout << deleteboxZ[i];
-        }
-    }
 }
 
 void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int& pair, players& user)
@@ -481,7 +473,3 @@ void HardMap(players& player)
    // deleteBoardZ(board);
     return;
 }
-
-
-
-

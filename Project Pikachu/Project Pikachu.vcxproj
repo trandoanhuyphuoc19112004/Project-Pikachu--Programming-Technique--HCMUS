@@ -24,6 +24,7 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Credit.h" />
     <ClInclude Include="CustomMode.h" />
+    <ClInclude Include="CustomMode_Normal.h" />
     <ClInclude Include="EndingBackground.h" />
     <ClInclude Include="BinIO.h" />
     <ClInclude Include="HardMap.h" />
@@ -39,8 +40,10 @@
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Credit.cpp" />
     <ClCompile Include="CustomMode.cpp" />
+    <ClCompile Include="CustomMode_Normal.cpp" />
     <ClCompile Include="EndingBackground.cpp" />
-    <ClCompile Include="HardMap.cpp" />
+    <ClCompile Include="HardMapY.cpp" />
+    <ClCompile Include="HardMapZ.cpp" />
     <ClCompile Include="InterfaceMenu_1.cpp" />
     <ClCompile Include="NormalMap.cpp" />
     <ClCompile Include="players.cpp" />
