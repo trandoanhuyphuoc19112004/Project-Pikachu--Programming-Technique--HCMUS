@@ -90,7 +90,23 @@ void checkPairY(Normal_Board** board, position& pos, position selectedPos[2], in
     }
     else return;
 }
-
+void printClockY()
+{
+    Hour h = { 0,60 }; // Set time countdown 
+    char a[5] = { '0','0',':','0','0' };
+    while (!stop_1)
+    {
+        if (!changetime(&h)) stop_1 = 1;
+        insertarray(a, &h);
+        WriteBlockChar(a, 1, 5, 85, 1, 0x004 | 0x060);
+        Sleep(970);
+    }
+    return;
+}
+void close_1(DWORD evt)
+{
+    if (evt == CTRL_CLOSE_EVENT) stop_1 = 1;
+}
 void HardMapY(players& player)
 {
     int line = 30;
@@ -113,7 +129,7 @@ void HardMapY(players& player)
     // Starting countdown
     SetConsoleCtrlHandler((PHANDLER_ROUTINE)close, TRUE);
     thread clock;
-    clock = thread(printClock);
+    clock = thread(printClockY);
     ClearScreen();
     // Thread run independently from function, so when thread run completed then out function 
     // Game is processing, update the screen 
@@ -144,7 +160,7 @@ void HardMapY(players& player)
         GoToXY(65, 2);
         cout << "Help:" << Help;
         GoToXY(85, 2);
-        cout << "Normal Mode";
+        cout << "Hard Mode";
         GoToXY(30, 30);
         cout << "Press ESC to exit";
         GoToXY(30, 32);
@@ -203,6 +219,7 @@ void HardMapY(players& player)
     }
     if (FlagCheckExit == -1) // If user choose esc
     {
+        stop_1 = 1; 
         DeleteBoard(board);
         clock.join();
         stop_1 = 0;
