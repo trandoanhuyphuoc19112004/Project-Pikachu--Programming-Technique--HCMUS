@@ -222,7 +222,7 @@ bool canConnect(Normal_Board** board, int x1, int x2, int y1, int y2)
 	}
 	if (LCheck(board, xMin, xMax, yMin, yMax)) return true;
 	if (Zcheck(board, xMin, xMax, yMin, yMax)) return true;
-	//if (Ucheck(board, x1, x2, y1, y2)) return true;
+	if (Ucheck(board, x1, x2, y1, y2)) return true;
 	return false;
 }
 

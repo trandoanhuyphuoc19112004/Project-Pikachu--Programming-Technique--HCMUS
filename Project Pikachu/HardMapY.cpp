@@ -4,41 +4,22 @@
 #include "NormalMap.h"
 #include "CheckNormal.h"
 #include "BinIO.h"
+int stop_1 = 0;
+bool clear_1 = 0;
 // CHECK PAIR Y 
 void deleteBoxY(Normal_Board** board, int x, int y)
 {
-    if (y == 0) {
-        if (board[x][y + 1].c == ' ') {
-            board[x][y].c == ' ';
+    while (y < BOARDWIDTH) {
+        if (board[x][y + 1].c == ' ' || y+1==BOARDWIDTH) {
+            board[x][y].c = ' ';
             return;
         }
-        board[x][y].c = board[x][y + 1].c;
+        else {
+            board[x][y].c = board[x][y + 1].c;
+        }
         y++;
-        while (y < BOARDWIDTH) {
-            if (board[x][y + 1].c == ' ') {
-                board[x][y].c == ' ';
-                return;
-            }
-            else {
-                board[x][y].c = board[x][y + 1].c;
-            }
-        }
     }
-    else if (board[x][y + 1].c == ' ') {
-        board[x][y].c = ' ';
-        return;
-    }
-    else {
-        while (y < BOARDWIDTH) {
-            if (board[x][y + 1].c == ' ') {
-                board[x][y].c == ' ';
-                return;
-            }
-            else {
-                board[x][y].c = board[x][y + 1].c;
-            }
-        }
-    }
+    return;
 }
 
 void checkPairY(Normal_Board** board, position& pos, position selectedPos[2], int& pair, players& user)
@@ -57,13 +38,14 @@ void checkPairY(Normal_Board** board, position& pos, position selectedPos[2], in
             Sleep(300);
             drawBox(board[selectedPos[1].x][selectedPos[1].y], 80);
             Sleep(300);
+            clear_1 = 1;
             if (selectedPos[0].y < selectedPos[1].y) {
-                deleteBoxY(board, selectedPos[0].x, selectedPos[0].y);
                 deleteBoxY(board, selectedPos[1].x, selectedPos[1].y);
+                deleteBoxY(board, selectedPos[0].x, selectedPos[0].y);
             }
             else {
-                deleteBoxY(board, selectedPos[1].x, selectedPos[1].y);
                 deleteBoxY(board, selectedPos[0].x, selectedPos[0].y);
+                deleteBoxY(board, selectedPos[1].x, selectedPos[1].y);
             }
         }
         else
@@ -106,11 +88,9 @@ void checkPairY(Normal_Board** board, position& pos, position selectedPos[2], in
             }
         }
     }
-
     else return;
 }
-int stop_1 = 0;
-bool clear_1 = 0;
+
 void HardMapY(players& player)
 {
     int line = 30;
