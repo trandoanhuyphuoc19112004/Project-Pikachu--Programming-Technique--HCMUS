@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include "Struct.h"
 void InitBoard(Normal_Board** board);
-void OutputBoard(Normal_Board** board, int nRow, int nCol);
 void DeleteBoard(Normal_Board** board);
 bool colCheck(Normal_Board** board, int xmin, int xmax, int y);
 bool rowCheck(Normal_Board** board, int ymin, int ymax, int x);

@@ -50,17 +50,14 @@ void LoadFile(string filename, players user)
 		}
 	}
 	
-	if (num > 7)
-	{
-		num--;
-	}
+	
 	LoadandDrawAscii("Trophy_1.txt", 20, 1, 12);
 	LoadandDrawAscii("Pokeball.txt", 20, 75, 12);
 	GoToXY(42, 10);
 	cout << "TOP 7 PLAYERS !!!" << endl;
 	GoToXY(42, 12);
 	cout << "NAME WITH SCORES" << endl;
-	for (int i = 0; i < num; i++)
+	for (int i = 0; i < min(num,7); i++) 
 	{
 		GoToXY(42, 14 + 2*i);
 		cout << numlst << " ";

@@ -234,7 +234,8 @@ bool canConnect(Normal_Board** board, int x1, int x2, int y1, int y2)
 	return false;
 }
 
-bool CheckOverall(Normal_Board** board, position pos1, position pos2) {
+bool CheckOverall(Normal_Board** board, position pos1, position pos2) 
+{
 	if (board[pos1.x][pos1.y].c == board[pos2.x][pos2.y].c) {
 		if (canConnect(board, pos1.x, pos2.x, pos1.y, pos2.y))
 			return true;
@@ -274,5 +275,6 @@ bool  HelpSuggestion(Normal_Board** board, position &pos1, position &pos2)
 					}
 				}
 		}
+	//return false;
 }
 	

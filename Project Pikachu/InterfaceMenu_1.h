@@ -29,6 +29,7 @@ int CreateMenuGame();
 // Load Image to Menu 
 void LoadandDrawAscii(string filename, int line, int x, int y);
 // Load BackGround
-void BackGround(char bg[][49], string filename);
-
+void BackGround(string* ptr, int line, string filename);
+// clear screen
+void ClearScreen();
 
