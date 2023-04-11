@@ -214,6 +214,7 @@ bool uCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	if (colCheckZ(board, xMin - 1, xMax, yTmp1)) {
 		for (int i = xMin - 1; i >= 0; i--) {
 			if (findNode(board, i, yTmp1) != NULL && findNode(board, i, yTmp2) != NULL) break;
+			if (i == 0) return true;
 			if (yTmp1 < yTmp2) {
 				if (rowCheckZ(board, yTmp1, yTmp2, i)) return true;
 			}
@@ -226,6 +227,7 @@ bool uCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	if (colCheckZ(board, xMin, xMax + 1, yTmp2)) {
 		for (int i = xMax + 1; i < BOARDHEIGTH; i++) {
 			if (findNode(board, i, yTmp1) != NULL && findNode(board, i, yTmp2) != NULL) break;
+			if (i == BOARDHEIGTH - 1) return true;
 			if (yTmp1 < yTmp2) {
 				if (rowCheckZ(board, yTmp1 - 1, yTmp2 + 1, i)) return true;
 			}
@@ -256,6 +258,7 @@ bool uCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	if (rowCheckZ(board, yMin, yMax + 1, xTmp1)) {
 		for (int i = yMax + 1; i < BOARDWIDTH; i++) {
 			if (findNode(board, yTmp1, i) != NULL && findNode(board, yTmp2, i) != NULL) break;
+			if (i == BOARDWIDTH - 1) return true;
 			if (xTmp1 > xTmp2) {
 				if (colCheckZ(board, xTmp1 - 1, xTmp2 + 1, i)) return true;
 			}
@@ -268,6 +271,7 @@ bool uCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	if (rowCheckZ(board, yMin - 1, yMax, xTmp1)) {
 		for (int i = yMin - 1; i >= 0; i--) {
 			if (findNode(board, yTmp1, i) != NULL && findNode(board, yTmp2, i) != NULL) break;
+			if (i == 0) return true;
 			if (xTmp1 > xTmp2) {
 				if (colCheckZ(board, xTmp1 - 1, xTmp2 + 1, i)) return true;
 			}
@@ -370,7 +374,7 @@ bool checkWin(Hard_Board** board)
 {
 	for (int i = 0; i < BOARDHEIGTH; i++)
 	{
-		if (board[i] != NULL)
+		if (board[i]->Is_Clear != 1)
 			return false;
 	}
 	return true;

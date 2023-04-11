@@ -97,8 +97,31 @@ void checkPair(Normal_Board** board, position& pos, position selectedPos[2], int
         selectedPos[0] = { -1, -1 };
         selectedPos[1] = { -1, -1 };
         pair = 0;
-    }
-    
+        for (int i = pos.x; i < BOARDHEIGTH; i++)
+        {
+            for (int j = pos.y; j < BOARDWIDTH; j++)
+            {
+                if (board[i][j].c != ' ')
+                {
+                    pos.y = j;
+                    pos.x = i;
+                    return;
+                }
+            }
+        }
+        for (int i = 0; i <= pos.x; i++)
+        {
+            for (int j = 0; j <= pos.y; j++)
+            {
+                if (board[i][j].c != ' ')
+                {
+                    pos.y = j;
+                    pos.x = i;
+                    return;
+                }
+            }
+        }
+    }    
     else return;
 }
 
