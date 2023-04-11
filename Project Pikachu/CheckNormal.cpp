@@ -97,7 +97,7 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 	// Check U di xuong
 	if (colCheck(board, xMin, xMax + 1, yTmp1)) {
 		for (int i = xMax + 1; i < BOARDHEIGTH; i++) {
-			if (board[i][yTmp1].c != ' ' || board[i][yTmp2].c != ' ') break;
+			if (board[i][yTmp1].c != ' ' || board[i][yTmp2].c != ' ') break; if (i == BOARDHEIGTH - 1) return true; 
 			if (yTmp1 < yTmp2)
 				if (rowCheck(board, yTmp1 - 1, yTmp2 + 1, i)) return true;
 				else
@@ -107,7 +107,7 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 	// Check U di len
 	if (colCheck(board, xMin - 1, xMax, yTmp2) || xMin ==  xMax) {
 		for (int i = xMin - 1; i >= 0; i--) {
-			if (board[i][yTmp1].c != ' ' || board[i][yTmp2].c != ' ') break;
+			if (board[i][yTmp1].c != ' ' || board[i][yTmp2].c != ' ') break; if (i == 0) return true; 
 			if (yTmp1 < yTmp2) {
 				if (rowCheck(board, yTmp1 - 1, yTmp2 + 1, i)) return true;
 			}
@@ -138,7 +138,7 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 	if (rowCheck(board, yMin, yMax + 1, xTmp1) || yMin == yMax) 
 	{
 		for (int i = yMax + 1; i < BOARDWIDTH; i++) {
-			if (board[xTmp1][i].c != ' ' || board[xTmp2][i].c != ' ') break;
+			if (board[xTmp1][i].c != ' ' || board[xTmp2][i].c != ' ') break; if (i == BOARDWIDTH - 1) return true; 
 			if (xTmp1 < xTmp2) {
 				if (colCheck(board, xTmp1 - 1, xTmp2 + 1, i)) return true;
 			}
@@ -150,7 +150,7 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 	// Check U huong sang trai
 	if (rowCheck(board, yMin - 1, yMax, xTmp2) || yMin == yMax) {
 		for (int i = yMin - 1; i >= 0; i--) {
-			if (board[xTmp1][i].c != ' ' || board[xTmp2][i].c != ' ') break;
+			if (board[xTmp1][i].c != ' ' || board[xTmp2][i].c != ' ') break; if (i == 0) return true; 
 			if (xTmp1 < xTmp2) {
 				if (colCheck(board, xTmp1 - 1, xTmp2 + 1, i)) return true;
 			}

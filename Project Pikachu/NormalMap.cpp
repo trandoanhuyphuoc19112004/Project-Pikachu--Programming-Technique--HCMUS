@@ -417,7 +417,7 @@ void DrawNormalMap(Normal_Board** board, int color)
 
 void printClock()
 {
-    Hour h = { 0,5 }; // Set time countdown 
+    Hour h = { 2,0 }; // Set time countdown 
     char a[5] = { '0','0',':','0','0' };
     while (!stop)
     {
