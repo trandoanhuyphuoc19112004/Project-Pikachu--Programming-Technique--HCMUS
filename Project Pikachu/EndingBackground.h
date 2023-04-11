@@ -6,3 +6,4 @@
 int LoseBackGround(players player);
 int WinBackGround(players player);
 int EndTimeBackGround(players player);
+int AuthorWin(players player);

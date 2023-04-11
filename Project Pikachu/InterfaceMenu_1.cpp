@@ -137,26 +137,20 @@ void HighLightMenuBar(int x, int y)
     else if (y == 20)
     {
         GoToXY(x, y);
-        cout << "       CUSTOM MODE       ";
+        cout << "       HOW TO PLAY      ";
     }
 
     else if (y == 22)
     {
         GoToXY(x, y);
-        cout << "       HOW TO PLAY      ";
-    }
-
-    else if (y == 24)
-    {
-        GoToXY(x, y);
         cout << "       LEADERBOARD     ";
     }
-    else if (y == 26)
+    else if (y == 24)
     {
         GoToXY(x, y);
         cout << "       CREDITS      ";
     }
-    else if (y == 28)
+    else if (y == 26)
     {
         GoToXY(x, y);
         cout << "       EXIT GAME     ";
@@ -181,26 +175,20 @@ void NoHighlightMenuBar(int x, int y)
     else if (y == 20)
     {
         GoToXY(x, y);
-        cout << "       CUSTOM MODE       ";
+        cout << "       HOW TO PLAY      ";
     }
 
     else if (y == 22)
     {
         GoToXY(x, y);
-        cout << "       HOW TO PLAY      ";
-    }
-
-    else if (y == 24)
-    {
-        GoToXY(x, y);
         cout << "       LEADERBOARD     ";
     }
-    else if (y == 26)
+    else if (y == 24)
     {
         GoToXY(x, y);
         cout << "       CREDITS      ";
     }
-    else if (y == 28)
+    else if (y == 26)
     {
         GoToXY(x, y);
         cout << "       EXIT GAME     ";
@@ -241,14 +229,13 @@ void BackGround(string *ptr, int line , string filename)
 
 int CreateMenuGame()
 {
-        system("cls");
+         ClearScreen();
         NoHighlightMenuBar(40, 16);
         NoHighlightMenuBar(40, 18);
         NoHighlightMenuBar(40, 20);
         NoHighlightMenuBar(40, 22);
         NoHighlightMenuBar(40, 24);
         NoHighlightMenuBar(40, 26);
-        NoHighlightMenuBar(40, 28);
         SetColor(14);
         LoadandDrawAscii("Logo.txt", 15, 30, 3);
         LoadandDrawAscii("Onix.txt", 15, 1, 11);
@@ -262,7 +249,6 @@ int CreateMenuGame()
         // Ref: https://www.youtube.com/watch?v=UjQIwlr_DqI
         while (true)
         {
-           // GoToXY(Key_x, Pre_y);
             // Check pressed button
             if (check == true)
             {
@@ -284,7 +270,7 @@ int CreateMenuGame()
                     {
                         Key_y -= 2;
                     }
-                    else if (key == DOWN && Key_y != 28)
+                    else if (key == DOWN && Key_y != 26)
                     {
                         Key_y += 2;
                     }
@@ -302,8 +288,6 @@ int CreateMenuGame()
                         if (Key_y == 24)
                             return 5;  
                         if (Key_y == 26)
-                            return 6;
-                        if (Key_y == 28)
                             return 0;
                     }
             }

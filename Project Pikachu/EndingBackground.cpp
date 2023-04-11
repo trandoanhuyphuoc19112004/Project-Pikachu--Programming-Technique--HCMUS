@@ -53,3 +53,22 @@ int EndTimeBackGround(players player)
 	GoToXY(40, 22);
 	return 0;
 }
+int AuthorWin(players player)
+{
+	system("cls");
+	char c;
+	// Ref: https://pixabay.com/sound-effects/dead-8bit-41400/
+	PlaySound(TEXT("Losemusic.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	SetColor(11);
+	LoadandDrawAscii("LoseBG.txt", 15, 20, 3);
+	GoToXY(40, 16);
+	cout << "NO VALID PAIR EXIST, AUTHORS WIN =)))))))";
+	GoToXY(40, 18);
+	cout << "Name:" << player.name;
+	GoToXY(40, 20);
+	cout << "Point:" << player.point;
+	GoToXY(40, 22);
+	cout << "Press any key to continue";
+	c = _getch();
+	return 0;
+}

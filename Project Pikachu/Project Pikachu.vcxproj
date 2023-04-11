@@ -23,8 +23,6 @@
     <ClInclude Include="CheckNormal.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Credit.h" />
-    <ClInclude Include="CustomMode.h" />
-    <ClInclude Include="CustomMode_Normal.h" />
     <ClInclude Include="EndingBackground.h" />
     <ClInclude Include="BinIO.h" />
     <ClInclude Include="HardMap.h" />
@@ -39,8 +37,6 @@
     <ClCompile Include="CheckNormal.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Credit.cpp" />
-    <ClCompile Include="CustomMode.cpp" />
-    <ClCompile Include="CustomMode_Normal.cpp" />
     <ClCompile Include="EndingBackground.cpp" />
     <ClCompile Include="HardMapY.cpp" />
     <ClCompile Include="HardMapZ.cpp" />
@@ -53,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="BG.txt" />
+    <Text Include="BG1.txt" />
     <Text Include="LeaderBoard_Logo.txt" />
     <Text Include="Logo.txt" />
     <Text Include="LoseBG.txt" />

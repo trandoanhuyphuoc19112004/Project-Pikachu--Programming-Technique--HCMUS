@@ -92,7 +92,7 @@ void checkPairY(Normal_Board** board, position& pos, position selectedPos[2], in
 }
 void printClockY()
 {
-    Hour h = { 0,60 }; // Set time countdown 
+    Hour h = { 1,30 }; // Set time countdown 
     char a[5] = { '0','0',':','0','0' };
     while (!stop_1)
     {
@@ -112,7 +112,7 @@ void HardMapY(players& player)
     int line = 30;
     string* ptr = new string[line]; // Allocate for background
     int Help = 2;
-    BackGround(ptr, line, "BG.txt");
+    BackGround(ptr, line, "BG1.txt");
     ClearScreen();
     Normal_Board** board = new Normal_Board * [BOARDHEIGTH];
     InitBoard(board);
@@ -143,7 +143,7 @@ void HardMapY(players& player)
             for (int i = 0; i < line; i++)
             {
                 SetColor(15);
-                GoToXY(35, y);
+                GoToXY(25, y);
                 cout << ptr[i] << endl;
                 y++;
             }
@@ -172,19 +172,19 @@ void HardMapY(players& player)
         position pos1 = { -1,-1 };
         position pos2 = { -1, -1 };
         FlagMoveExist = HelpSuggestion(board, pos1, pos2); // Check is move exist 
-        if (!FlagMoveExist)
+        FlagCheckWin = CheckWin(board); // Check Win 
+        if (!FlagMoveExist && !FlagCheckWin)
         {
             DeleteBoard(board);
             stop_1 = 1;
-            WinBackGround(player);
+            clock.join();
+            AuthorWin(player);
             SaveFile("Leaderboard.bin", player);
             stop_1 = 0;
             delete[] ptr;
             ptr = nullptr;
             return; // Out function when no pair valid exist 
         }
-        FlagCheckWin = CheckWin(board);
-        // Check Win
         if (CheckWin(board))
         {
             DeleteBoard(board);

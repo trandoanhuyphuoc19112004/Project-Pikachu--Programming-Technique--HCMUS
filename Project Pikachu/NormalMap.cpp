@@ -417,7 +417,7 @@ void DrawNormalMap(Normal_Board** board, int color)
 
 void printClock()
 {
-    Hour h = { 2,0 }; // Set time countdown 
+    Hour h = { 0,5 }; // Set time countdown 
     char a[5] = { '0','0',':','0','0' };
     while (!stop)
     {
@@ -496,20 +496,20 @@ void NormalMap(players& player)
             position pos1 = { -1,-1 };
             position pos2 = { -1, -1 };
             FlagMoveExist = HelpSuggestion(board, pos1, pos2); // Check is move exist 
-            if (!FlagMoveExist)
+            FlagCheckWin = CheckWin(board);
+            // Check Win
+            if (!FlagMoveExist && !FlagCheckWin)
             {
-                DeleteBoard(board);
                 stop = 1;
                 clock.join();
-                WinBackGround(player);
+                AuthorWin(player);
                 SaveFile("Leaderboard.bin", player);
                 stop = 0;
+               DeleteBoard(board);
                 delete[] ptr;
                 ptr = nullptr;
                 return; // Out function when no pair valid exist 
             }
-            FlagCheckWin = CheckWin(board);
-            // Check Win
             if (CheckWin(board))
             {
                 DeleteBoard(board);

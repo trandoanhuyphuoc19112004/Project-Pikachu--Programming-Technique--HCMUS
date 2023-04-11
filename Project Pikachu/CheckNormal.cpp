@@ -135,7 +135,8 @@ bool Ucheck(Normal_Board** board, int x1, int x2, int y1, int y2)
 		if (rowCheck(board, yMin, BOARDWIDTH, xTmp1)) return true;
 	}
 	// Check U huong sang phai
-	if (rowCheck(board, yMin, yMin + 1, xTmp1) || yMin == yMax) {
+	if (rowCheck(board, yMin, yMax + 1, xTmp1) || yMin == yMax) 
+	{
 		for (int i = yMax + 1; i < BOARDWIDTH; i++) {
 			if (board[xTmp1][i].c != ' ' || board[xTmp2][i].c != ' ') break;
 			if (xTmp1 < xTmp2) {
@@ -267,5 +268,6 @@ bool  HelpSuggestion(Normal_Board** board, position &pos1, position &pos2)
 					}
 				}
 		}
+	return false; 
 }
 	

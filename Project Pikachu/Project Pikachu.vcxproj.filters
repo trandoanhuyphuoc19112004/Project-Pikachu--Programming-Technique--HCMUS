@@ -51,12 +51,6 @@
     <ClInclude Include="Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CustomMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomMode_Normal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckNormal.cpp">
@@ -95,12 +89,6 @@
     <ClCompile Include="Tutorial.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="CustomMode.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomMode_Normal.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="HardMapY.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
@@ -128,6 +116,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="BG.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="BG1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
