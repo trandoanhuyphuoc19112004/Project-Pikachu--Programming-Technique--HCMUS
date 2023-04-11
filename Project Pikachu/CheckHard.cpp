@@ -1,5 +1,6 @@
 #include"CheckHard.h"
 #include"HardMap.h"
+//Ham them node vao dau list
 void push(Hard_Board*& head, Hard_Board* data) {
 	if (head == NULL) {
 		head = data;
@@ -13,6 +14,7 @@ void push(Hard_Board*& head, Hard_Board* data) {
 	}
 }
 
+//Ham tra ve dia chi cua o can tim
 Hard_Board* findNode(Hard_Board** board, int x, int y) 
 {
 	if (x < 0 || x>4 || y < 0 || y>5)
@@ -28,6 +30,7 @@ Hard_Board* findNode(Hard_Board** board, int x, int y)
 	return NULL;
 }
 
+//Ham tao bang va random
 void initBoardZ(Hard_Board** board) 
 {
 	for (int i = 0; i < BOARDHEIGTH; i++) 
@@ -68,6 +71,7 @@ void initBoardZ(Hard_Board** board)
 		num--;
 	}
 }
+//Ham xoa het bang
 void deleteBoardZ(Hard_Board** board)
 {
 	for (int i = 0; i < BOARDHEIGTH; i++) 
@@ -82,6 +86,7 @@ void deleteBoardZ(Hard_Board** board)
 	}
 	delete[] board;
 }
+//Ham check 2 o cung hang
 bool rowCheckZ(Hard_Board** board, int yMin, int yMax, int x) {
 	if (yMax = yMin + 1) return true;
 	Hard_Board* tmp = findNode(board, x, yMin + 1);
@@ -94,7 +99,7 @@ bool rowCheckZ(Hard_Board** board, int yMin, int yMax, int x) {
 		tmp = findNode(board, x, i);
 	}
 }
-   
+//Ham check 2 o cung cot
 bool colCheckZ(Hard_Board** board, int xMin, int xMax, int y) {
 	if (xMax = xMin + 1) return true;
 	Hard_Board* tmp = findNode(board, xMin + 1, y);
@@ -107,7 +112,7 @@ bool colCheckZ(Hard_Board** board, int xMin, int xMax, int y) {
 		tmp = findNode(board, i, y);
 	}
 }
-
+//Ham check chu L
 bool lCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	if (x1 > x2) {
 		if (y1 > y2) {
@@ -131,7 +136,7 @@ bool lCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	}
 	return false;
 }
-
+//Ham check chu Z
 bool zCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	//Check Z dung
 	if (y2 > y1) {
@@ -185,15 +190,15 @@ bool zCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	}
 	return false;
 }
-
+//Ham check chu Z
 bool uCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	int xMin, xMax, yMin, yMax,
 		xTmp1, xTmp2, yTmp1, yTmp2; //Tmp: Temp
 	if (x1 > x2) {
 		xMax = x1;
 		xMin = x2;
-		yTmp2 = y1;
-		yTmp1 = y2;
+		yTmp2 = y1;			//yTmp2 lay gia tri y cua o co x lon hon
+		yTmp1 = y2;			//yTmp1 thi nguoc lai
 	}
 	else {
 		xMax = x2;
@@ -232,8 +237,8 @@ bool uCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	if (y1 < y2) {
 		yMin = y1;
 		yMax = y2;
-		xTmp1 = x1;
-		xTmp2 = x2;
+		xTmp1 = x1;			//xTmp1 lay gia tri x cua o co y be hon
+		xTmp2 = x2;			//xTmp2 thi nguoc lai
 	}
 	else {
 		yMin = y2;
@@ -272,7 +277,7 @@ bool uCheckZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 		}
 	}
 }
-
+//Ham check duong di
 bool canConnectZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	if (x1 == x2)
 	{
@@ -298,29 +303,29 @@ bool canConnectZ(Hard_Board** board, int x1, int x2, int y1, int y2) {
 	if (zCheckZ(board, x1, x2, y1, y2)) return true;
 	if (uCheckZ(board, x1, x2, y1, y2)) return true;
 }
-
+//Ham xoa o
 void deleteNode(Hard_Board** board, int x, int y) 
 {
-	Hard_Board* tmp = findNode(board, x, y);
-	if (y == 0) 
+	Hard_Board* tmp = findNode(board, x, y); //Lay dia chi cua o
+	if (y == 0) //Neu o nam o cot dau tien
 	{
-		if (board[x]->next == NULL) 
+		if (board[x]->next == NULL) //Neu o ben phai trong
 		{
-			removeBox(tmp->i,tmp->j);
+			removeBox(tmp->i,tmp->j);	//Xoa o hien tai
 			board[x] == NULL;
-			board[x]->Is_Clear = 1;
+			board[x]->Is_Clear = 1;		//Is_Clear=1 tuc la hang da trong het cac o
 			return;
 		}
-		board[x]->c = tmp->next->c;
-		tmp = board[x]->next;
-		if (tmp->next == NULL) {
-			removeBox(tmp->i, tmp->j);
+		board[x]->c = tmp->next->c; //Gan gia tri c o hien tai bang o ben phai
+		tmp = board[x]->next;		//Di chuyen con tro sang o ben phai
+		if (tmp->next == NULL) {	//Neu o ben phai trong
+			removeBox(tmp->i, tmp->j); //Xoa o hien tai
 			delete tmp;
 			board[x]->next = NULL;
 		}
 		else 
 		{
-			while (tmp->next->next != NULL) 
+			while (tmp->next->next != NULL) //Chay con tro tu trai sang phai cho toi khi gap o trong cach 1 o
 			{
 				tmp->c = tmp->next->c;
 				tmp = tmp->next;
@@ -331,7 +336,7 @@ void deleteNode(Hard_Board** board, int x, int y)
 			tmp->next = NULL;
 		}
 	}
-	else if (tmp->next != NULL) 
+	else if (tmp->next != NULL) //Neu o ben phai khong trong
 	{
 		while (tmp->next->next != NULL) 
 		{
@@ -345,13 +350,13 @@ void deleteNode(Hard_Board** board, int x, int y)
 	}
 	else 
 	{
-		removeBox(tmp->i, tmp->j);
+		removeBox(tmp->i, tmp->j); //Neu o ben phai trong
 		delete tmp;
 		tmp = findNode(board, x, y - 1);
 		tmp->next = NULL;
 	}
 }
-
+//Check tong
 bool checkOverallZ(Hard_Board** board, position p1, position p2) {
 	if (findNode(board, p1.x, p1.y)->c == findNode(board, p2.x, p2.y)->c) {
 		if (canConnectZ(board, p1.x, p2.x, p1.y, p2.y)) {
@@ -360,7 +365,7 @@ bool checkOverallZ(Hard_Board** board, position p1, position p2) {
 	}
 	return false;
 }
-
+//Check chien thang
 bool checkWin(Hard_Board** board)
 {
 	for (int i = 0; i < BOARDHEIGTH; i++)

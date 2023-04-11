@@ -16,6 +16,8 @@ char deleteboxZ[5][10] = {{"         "},
                           {"         "},
                           {"         "},
                           {"         "} };
+
+//Ve o
 void drawBoxZ(Hard_Board board)
 {
     // Draw Box
@@ -49,10 +51,10 @@ void drawBoxZ(Hard_Board board)
         }
     }
 }
-
+//Check mot cap o
 void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int& pair, players& user)
 {
-    if (pair == 2) {
+    if (pair == 2) { 
         if (checkOverallZ(board, selectedPos[0], selectedPos[1]))
         {
             // Ref sound: https://pixabay.com/sound-effects/game-start-6104/
@@ -67,14 +69,14 @@ void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int&
             tmp2->Is_Chosen = 0;
             tmp1->Is_Selected = 0;
             tmp2->Is_Selected = 0;
-            if (selectedPos[0].y > selectedPos[1].y)
+            if (selectedPos[0].y > selectedPos[1].y) 
             {
-                deleteNode(board, selectedPos[0].x, selectedPos[0].y);
+                deleteNode(board, selectedPos[0].x, selectedPos[0].y); //Neu y1>y2 thi xoa o co y1 truoc
                 deleteNode(board, selectedPos[1].x, selectedPos[1].y);
             }
             else
             {
-                deleteNode(board, selectedPos[1].x, selectedPos[1].y);
+                deleteNode(board, selectedPos[1].x, selectedPos[1].y); //Nguoc lai
                 deleteNode(board, selectedPos[0].x, selectedPos[0].y);
             }
         }
@@ -122,6 +124,7 @@ void checkPairZ(Hard_Board** board, position& pos, position selectedPos[2], int&
 
     else return;
 }
+//Ham di chuyen con tro
 void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int& pair, players& user, int& FlagCheckExit)
 {
     int funckey;
@@ -395,6 +398,7 @@ void moveCursorZ(Hard_Board** board, position& pos, position selectedPos[], int&
         }
     }
 }
+//Ham ve bang
 void DrawHardMap(Hard_Board** board)
 {
     for (int i = 0; i < BOARDHEIGTH; i++)
@@ -409,6 +413,7 @@ void DrawHardMap(Hard_Board** board)
         }
     }
 }
+//Ham xoa o
 void removeBox(int x, int y) 
 {
     x++; y++;
@@ -418,6 +423,7 @@ void removeBox(int x, int y)
         cout << deleteboxZ[i];
     }
 }
+//Ham Hard Map chinh
 void HardMap(players& player)
 {
     system("cls");
