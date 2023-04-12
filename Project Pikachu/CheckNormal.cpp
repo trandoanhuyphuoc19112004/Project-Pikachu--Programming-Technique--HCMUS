@@ -68,9 +68,9 @@ bool LCheck(Normal_Board** board, int xMin, int xMax, int  yMin, int yMax)
 {
 	if (xMin == xMax && yMin == yMax)
 		return false;
+	if (rowCheck(board, yMin, yMax + 1, xMax) && colCheck(board, xMin, xMax + 1, yMax)) return true;
 	if (rowCheck(board, yMin, yMax + 1, xMin) && colCheck(board, xMin - 1, xMax, yMax)) return true;
 	if (rowCheck(board, yMin - 1, yMax, xMax) && colCheck(board, xMin, xMax + 1, yMin)) return true;
-	if (rowCheck(board, yMin, yMax + 1, xMax) && colCheck(board, xMin, xMax + 1, yMax)) return true;
 	if (rowCheck(board, yMin - 1, yMax, xMin) && colCheck(board, xMin - 1, xMax, yMin)) return true;
 	return false;
 }
@@ -170,13 +170,16 @@ bool Zcheck(Normal_Board** board, int xMin, int xMax, int yMin, int yMax)
 	if (xMin == xMax && yMin == yMax)
 		return false;
 	for (int i = yMin + 1; i <= yMax; i++) {
-		if (rowCheck(board, yMin, i, xMin) && colCheck(board, xMin - 1, xMax + 1, i) && rowCheck(board, i - 1, yMax, xMax)) return true;
-		if (rowCheck(board, yMin, i, xMax) && colCheck(board, xMin - 1, xMax + 1, i) && rowCheck(board, i - 1, yMax, xMin)) return true;
-
+		if (colCheck(board, xMin - 1, xMax + 1, i)) {
+			if (rowCheck(board, yMin, i + 1, xMin) && rowCheck(board, i - 1, yMax, xMax)) return true;
+			if (rowCheck(board, yMin, i + 1, xMax) && rowCheck(board, i - 1, yMax, xMin)) return true;
+		}
 	}
 	for (int i = xMin + 1; i <= xMax; i++) {
-		if (colCheck(board, xMin, i + 1, yMin) && rowCheck(board, yMin - 1, yMax + 1, i) && colCheck(board, i - 1, xMax, yMax)) return true;
-		if (colCheck(board, xMin, i + 1, yMax) && rowCheck(board, yMin - 1, yMax + 1, i) && colCheck(board, i - 1, xMax, yMin)) return true;
+		if (rowCheck(board, yMin - 1, yMax + 1, i)) {
+			if (colCheck(board, xMin, i + 1, yMin) && colCheck(board, i - 1, xMax, yMax)) return true;
+			if (colCheck(board, xMin, i + 1, yMax) && colCheck(board, i - 1, xMax, yMin)) return true;
+		}
 	}
 	return false;
 }
