@@ -518,21 +518,7 @@ void NormalMap(players& player)
             cout << "Press Tab to get help";
             position pos1 = { -1,-1 };
             position pos2 = { -1, -1 };
-            FlagMoveExist = HelpSuggestion(board, pos1, pos2); // Check is move exist 
-            FlagCheckWin = CheckWin(board);
-            // Check Win
-            if (!FlagMoveExist && !FlagCheckWin)
-            {
-                stop = 1;
-                clock.join();
-                AuthorWin(player);
-                SaveFile("Leaderboard.bin", player);
-                stop = 0;
-               DeleteBoard(board);
-                delete[] ptr;
-                ptr = nullptr;
-                return; // Out function when no pair valid exist 
-            }
+            FlagCheckWin = CheckWin(board);   // Check Win
             if (CheckWin(board))
             {
                 DeleteBoard(board);
@@ -545,12 +531,29 @@ void NormalMap(players& player)
                 ptr = nullptr;
                 return; // Out function when you win 
             }
+            FlagMoveExist = HelpSuggestion(board, pos1, pos2); // Check is move exist 
+            if (!FlagMoveExist)
+            {
+                stop = 1;
+                clock.join();
+                if (flag != 0)
+                {
+                    LuckyWin(player);
+                    SaveFile("Leaderboard.bin", player);
+                }
+                stop = 0;
+                DeleteBoard(board);
+                delete[] ptr;
+                ptr = nullptr;
+                return; // Out function when no pair valid exist 
+            }
             // Cursor points to the box, the box will be lighted
             board[CurPos.x][CurPos.y].Is_Selected = 1;
             DrawNormalMap(board, 112);
             moveCursor(board, CurPos, selectedPos, pair, player, FlagCheckExit, Help);
             checkPair(board, CurPos, selectedPos, pair, player);
             flag++;
+            
         }
         // Check lose 
         if (player.life < 0)

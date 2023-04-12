@@ -171,20 +171,7 @@ void HardMapY(players& player)
         cout << "Press Tab to get help";
         position pos1 = { -1,-1 };
         position pos2 = { -1, -1 };
-        FlagMoveExist = HelpSuggestion(board, pos1, pos2); // Check is move exist 
         FlagCheckWin = CheckWin(board); // Check Win 
-        if (!FlagMoveExist && !FlagCheckWin)
-        {
-            DeleteBoard(board);
-            stop_1 = 1;
-            clock.join();
-            AuthorWin(player);
-            SaveFile("Leaderboard.bin", player);
-            stop_1 = 0;
-            delete[] ptr;
-            ptr = nullptr;
-            return; // Out function when no pair valid exist 
-        }
         if (CheckWin(board))
         {
             DeleteBoard(board);
@@ -196,6 +183,19 @@ void HardMapY(players& player)
             delete[] ptr;
             ptr = nullptr;
             return; // Out function when you win 
+        }
+        FlagMoveExist = HelpSuggestion(board, pos1, pos2); // Check is move exist 
+        if (!FlagMoveExist)
+        {
+            DeleteBoard(board);
+            stop_1 = 1;
+            clock.join();
+            LuckyWin(player);
+            SaveFile("Leaderboard.bin", player);
+            stop_1 = 0;
+            delete[] ptr;
+            ptr = nullptr;
+            return; // Out function when no pair valid exist 
         }
         // Cursor points to the box, the box will be lighted
         board[CurPos.x][CurPos.y].Is_Selected = 1;

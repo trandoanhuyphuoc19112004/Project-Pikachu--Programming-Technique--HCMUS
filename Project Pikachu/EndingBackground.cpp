@@ -53,16 +53,16 @@ int EndTimeBackGround(players player)
 	GoToXY(40, 22);
 	return 0;
 }
-int AuthorWin(players player)
+int LuckyWin(players player)
 {
 	system("cls");
 	char c;
-	// Ref: https://pixabay.com/sound-effects/dead-8bit-41400/
-	PlaySound(TEXT("Losemusic.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	// Ref: https://pixabay.com/sound-effects/win-sfx-38507/
+	PlaySound(TEXT("Winmusic.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	SetColor(11);
-	LoadandDrawAscii("LoseBG.txt", 15, 20, 3);
+	LoadandDrawAscii("Winbackground.txt", 15, 2, 3);
 	GoToXY(40, 16);
-	cout << "NO VALID PAIR EXIST, AUTHORS WIN =)))))))";
+	cout << "NO VALID PAIR EXIST, YOU WIN =)))))))";
 	GoToXY(40, 18);
 	cout << "Name:" << player.name;
 	GoToXY(40, 20);
