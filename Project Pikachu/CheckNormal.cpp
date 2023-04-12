@@ -273,7 +273,8 @@ bool  HelpSuggestion(Normal_Board** board, position &pos1, position &pos2)
 			for (int g = 0; g < BOARDHEIGTH; g++)
 				for (int h = 0; h < BOARDWIDTH; h++)
 				{
-					if (CheckOverall(board, { i,j }, { g,h }) && i!=g && g!=h)
+					if (i == g && j == h) continue;
+					if (CheckOverall(board, { i,j }, { g,h }) )
 					{
 						pos1 = { i,j };
 						pos2 = { g,h };
